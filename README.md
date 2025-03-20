@@ -1,3 +1,5 @@
+
+<h1 align="center">TThe development of the project is currently on hold until further notice. We will provide updates as soon as they become available.</h1>
 <h1 align="center">
     PHP Telegram Bot<br>
 	<br>
