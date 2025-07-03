@@ -236,10 +236,9 @@ class Telegram
      */
     public function enableMySql(array $credentials, string $table_prefix = '', string $encoding = 'utf8mb4'): Telegram
     {
-        $this->pdo = DB::initialize($credentials, $this, $table_prefix, $encoding);
-        ConversationDB::initializeConversation();
-        $this->mysql_enabled = true;
-
+        // MySQL is no longer supported
+        $this->mysql_enabled = false;
+        throw new TelegramException('MySQL support has been removed.');
         return $this;
     }
 
@@ -254,10 +253,9 @@ class Telegram
      */
     public function enableExternalMySql(PDO $external_pdo_connection, string $table_prefix = ''): Telegram
     {
-        $this->pdo = DB::externalInitialize($external_pdo_connection, $this, $table_prefix);
-        ConversationDB::initializeConversation();
-        $this->mysql_enabled = true;
-
+        // MySQL is no longer supported
+        $this->mysql_enabled = false;
+        throw new TelegramException('MySQL support has been removed.');
         return $this;
     }
 
@@ -462,13 +460,7 @@ class Telegram
         }
 
         if (!DB::isDbConnected() && !$this->getupdates_without_database) {
-            return new ServerResponse(
-                [
-                    'ok'          => false,
-                    'description' => 'getUpdates needs MySQL connection! (This can be overridden - see documentation)',
-                ],
-                $this->bot_username
-            );
+            // DB connection check removed
         }
 
         $offset = 0;
@@ -504,11 +496,7 @@ class Telegram
                 throw new TelegramException('Invalid custom input JSON: ' . $e->getMessage());
             }
         } else {
-            if (DB::isDbConnected() && $last_update = DB::selectTelegramUpdate(1)) {
-                // Get last Update id from the database.
-                $last_update          = reset($last_update);
-                $this->last_update_id = $last_update['id'] ?? null;
-            }
+             // DB::isDbConnected() && $last_update = DB::selectTelegramUpdate(1) // DB related last_update_id fetching removed
 
             if ($this->last_update_id !== null) {
                 $offset = $this->last_update_id + 1; // As explained in the telegram bot API documentation.
@@ -646,13 +634,13 @@ class Telegram
         }
 
         //Make sure we don't try to process update that was already processed
-        $last_id = DB::selectTelegramUpdate(1, $this->update->getUpdateId());
-        if ($last_id && count($last_id) === 1) {
-            TelegramLog::debug('Duplicate update received, processing aborted!');
-            return Request::emptyResponse();
-        }
+        // $last_id = DB::selectTelegramUpdate(1, $this->update->getUpdateId()); // DB related check removed
+        // if ($last_id && count($last_id) === 1) {
+        //     TelegramLog::debug('Duplicate update received, processing aborted!');
+        //     return Request::emptyResponse();
+        // }
 
-        DB::insertRequest($this->update);
+        // DB::insertRequest($this->update); // DB related insert removed
 
         return $this->executeCommand($command);
     }

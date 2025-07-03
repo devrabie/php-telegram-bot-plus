@@ -74,15 +74,13 @@ class Conversation
      */
     public function __construct(int $user_id, int $chat_id, string $command = '')
     {
+        // Conversations are disabled due to DB removal
         $this->user_id = $user_id;
         $this->chat_id = $chat_id;
         $this->command = $command;
-
-        //Try to load an existing conversation if possible
-        if (!$this->load() && $command !== '') {
-            //A new conversation start
-            $this->start();
-        }
+        $this->conversation = null; // Ensure conversation is null
+        $this->notes = null;
+        $this->protected_notes = null;
     }
 
     /**
@@ -107,26 +105,8 @@ class Conversation
      */
     protected function load(): bool
     {
-        //Select an active conversation
-        $conversation = ConversationDB::selectConversation($this->user_id, $this->chat_id, 1);
-        if (isset($conversation[0])) {
-            //Pick only the first element
-            $this->conversation = $conversation[0];
-
-            //Load the command from the conversation if it hasn't been passed
-            $this->command = $this->command ?: $this->conversation['command'];
-
-            if ($this->command !== $this->conversation['command']) {
-                $this->cancel();
-                return false;
-            }
-
-            //Load the conversation notes
-            $this->protected_notes = json_decode($this->conversation['notes'], true);
-            $this->notes           = $this->protected_notes;
-        }
-
-        return $this->exists();
+        // Always return false as DB is removed
+        return false;
     }
 
     /**
@@ -136,7 +116,8 @@ class Conversation
      */
     public function exists(): bool
     {
-        return $this->conversation !== null;
+        // Always return false as DB is removed
+        return false;
     }
 
     /**
@@ -147,18 +128,7 @@ class Conversation
      */
     protected function start(): bool
     {
-        if (
-            $this->command
-            && !$this->exists()
-            && ConversationDB::insertConversation(
-                $this->user_id,
-                $this->chat_id,
-                $this->command
-            )
-        ) {
-            return $this->load();
-        }
-
+        // Always return false as DB is removed
         return false;
     }
 
@@ -172,7 +142,8 @@ class Conversation
      */
     public function stop(): bool
     {
-        return $this->updateStatus('stopped') && $this->clear();
+        // Always return true as DB is removed and nothing to stop
+        return true;
     }
 
     /**
@@ -183,7 +154,8 @@ class Conversation
      */
     public function cancel(): bool
     {
-        return $this->updateStatus('cancelled') && $this->clear();
+        // Always return true as DB is removed and nothing to cancel
+        return true;
     }
 
     /**
@@ -196,19 +168,7 @@ class Conversation
      */
     protected function updateStatus(string $status): bool
     {
-        if ($this->exists()) {
-            $fields = ['status' => $status];
-            $where  = [
-                'id'      => $this->conversation['id'],
-                'status'  => 'active',
-                'user_id' => $this->user_id,
-                'chat_id' => $this->chat_id,
-            ];
-            if (ConversationDB::updateConversation($fields, $where)) {
-                return true;
-            }
-        }
-
+        // Always return false as DB is removed
         return false;
     }
 
@@ -220,15 +180,7 @@ class Conversation
      */
     public function update(): bool
     {
-        if ($this->exists()) {
-            $fields = ['notes' => json_encode($this->notes, JSON_UNESCAPED_UNICODE)];
-            //I can update a conversation whatever the state is
-            $where = ['id' => $this->conversation['id']];
-            if (ConversationDB::updateConversation($fields, $where)) {
-                return true;
-            }
-        }
-
+        // Always return false as DB is removed
         return false;
     }
 

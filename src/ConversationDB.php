@@ -11,9 +11,7 @@
 
 namespace Longman\TelegramBot;
 
-use Exception;
 use Longman\TelegramBot\Exception\TelegramException;
-use PDO;
 
 class ConversationDB extends DB
 {
@@ -22,9 +20,7 @@ class ConversationDB extends DB
      */
     public static function initializeConversation(): void
     {
-        if (!defined('TB_CONVERSATION')) {
-            define('TB_CONVERSATION', self::$table_prefix . 'conversation');
-        }
+        // Table definition removed as DB is removed
     }
 
     /**
@@ -39,39 +35,8 @@ class ConversationDB extends DB
      */
     public static function selectConversation(int $user_id, int $chat_id, $limit = 0)
     {
-        if (!self::isDbConnected()) {
-            return false;
-        }
-
-        try {
-            $sql = '
-              SELECT *
-              FROM `' . TB_CONVERSATION . '`
-              WHERE `status` = :status
-                AND `chat_id` = :chat_id
-                AND `user_id` = :user_id
-            ';
-
-            if ($limit > 0) {
-                $sql .= ' LIMIT :limit';
-            }
-
-            $sth = self::$pdo->prepare($sql);
-
-            $sth->bindValue(':status', 'active');
-            $sth->bindValue(':user_id', $user_id);
-            $sth->bindValue(':chat_id', $chat_id);
-
-            if ($limit > 0) {
-                $sth->bindValue(':limit', $limit, PDO::PARAM_INT);
-            }
-
-            $sth->execute();
-
-            return $sth->fetchAll(PDO::FETCH_ASSOC);
-        } catch (Exception $e) {
-            throw new TelegramException($e->getMessage());
-        }
+        // Always return false as DB is removed
+        return false;
     }
 
     /**
@@ -86,31 +51,8 @@ class ConversationDB extends DB
      */
     public static function insertConversation(int $user_id, int $chat_id, string $command): bool
     {
-        if (!self::isDbConnected()) {
-            return false;
-        }
-
-        try {
-            $sth = self::$pdo->prepare('INSERT INTO `' . TB_CONVERSATION . '`
-                (`status`, `user_id`, `chat_id`, `command`, `notes`, `created_at`, `updated_at`)
-                VALUES
-                (:status, :user_id, :chat_id, :command, :notes, :created_at, :updated_at)
-            ');
-
-            $date = self::getTimestamp();
-
-            $sth->bindValue(':status', 'active');
-            $sth->bindValue(':command', $command);
-            $sth->bindValue(':user_id', $user_id);
-            $sth->bindValue(':chat_id', $chat_id);
-            $sth->bindValue(':notes', '[]');
-            $sth->bindValue(':created_at', $date);
-            $sth->bindValue(':updated_at', $date);
-
-            return $sth->execute();
-        } catch (Exception $e) {
-            throw new TelegramException($e->getMessage());
-        }
+        // Always return false as DB is removed
+        return false;
     }
 
     /**
@@ -124,9 +66,7 @@ class ConversationDB extends DB
      */
     public static function updateConversation(array $fields_values, array $where_fields_values): bool
     {
-        // Auto update the update_at field.
-        $fields_values['updated_at'] = self::getTimestamp();
-
-        return self::update(TB_CONVERSATION, $fields_values, $where_fields_values);
+        // Always return false as DB is removed
+        return false;
     }
 }

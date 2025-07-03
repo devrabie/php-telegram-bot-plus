@@ -744,9 +744,7 @@ class Request
 
         // Special case for sent polls, which need to be saved specially.
         // @todo Take into account if DB gets extracted into separate module.
-        if ($response->isOk() && ($message = $response->getResult()) && ($message instanceof Message) && $poll = $message->getPoll()) {
-            DB::insertPollRequest($poll);
-        }
+        // DB::insertPollRequest($poll); // Database functionality removed
 
         // Reset current action after completion.
         self::$current_action = '';
@@ -893,19 +891,8 @@ class Request
         array $data,
         array $select_chats_params
     ): array {
-        self::ensureValidAction($callback_function);
-
-        $chats = DB::selectChats($select_chats_params);
-
-        $results = [];
-        if (is_array($chats)) {
-            foreach ($chats as $row) {
-                $data['chat_id'] = $row['chat_id'];
-                $results[]       = self::send($callback_function, $data);
-            }
-        }
-
-        return $results;
+        // Always return empty array as DB is removed, so no chats to select.
+        return [];
     }
 
     /**
@@ -918,20 +905,8 @@ class Request
      */
     public static function setLimiter(bool $enable = true, array $options = []): void
     {
-        if (DB::isDbConnected()) {
-            $options_default = [
-                'interval' => 1,
-            ];
-
-            $options = array_merge($options_default, $options);
-
-            if (!is_numeric($options['interval']) || $options['interval'] <= 0) {
-                throw new TelegramException('Interval must be a number and must be greater than zero!');
-            }
-
-            self::$limiter_interval = $options['interval'];
-            self::$limiter_enabled  = $enable;
-        }
+        // Limiter is disabled as DB is removed
+        self::$limiter_enabled = false;
     }
 
     /**
@@ -1001,26 +976,9 @@ class Request
                         throw new TelegramException('Timed out while waiting for a request spot!');
                     }
 
-                    if (!($requests = DB::getTelegramRequestCount($chat_id, $inline_message_id))) {
-                        break;
-                    }
-
-                    // Make sure we're handling integers here.
-                    $requests = array_map('intval', $requests);
-
-                    $chat_per_second   = ($requests['LIMIT_PER_SEC'] === 0);    // No more than one message per second inside a particular chat
-                    $global_per_second = ($requests['LIMIT_PER_SEC_ALL'] < 30); // No more than 30 messages per second to different chats
-                    $groups_per_minute = (((is_numeric($chat_id) && $chat_id > 0) || $inline_message_id !== null) || ((!is_numeric($chat_id) || $chat_id < 0) && $requests['LIMIT_PER_MINUTE'] < 20));    // No more than 20 messages per minute in groups and channels
-
-                    if ($chat_per_second && $global_per_second && $groups_per_minute) {
-                        break;
-                    }
-
-                    $timeout--;
-                    usleep((int) (self::$limiter_interval * 1000000));
+                    // Limiter logic removed as DB is removed
+                    break;
                 }
-
-                DB::insertTelegramRequest($action, $data);
             }
         }
     }

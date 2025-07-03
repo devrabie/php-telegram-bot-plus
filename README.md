@@ -86,8 +86,7 @@ The Bot can:
 - Manage Channel from the bot admin interface.
 - Full support for **inline bots**.
 - Inline keyboard.
-- Messages, InlineQuery and ChosenInlineQuery are stored in the Database.
-- Conversation feature.
+- Conversation feature (Currently disabled due to database removal).
 
 ---
 
@@ -201,7 +200,7 @@ The bot can handle updates with [**Webhook**](#webhook-installation) or [**getUp
 | ---- | :----: | :----: |
 | Description | Telegram sends the updates directly to your host | You have to fetch Telegram updates manually |
 | Host with https | Required | Not required |
-| MySQL | Not required | ([Not](#getupdates-without-database)) Required  |
+| MySQL | Not required | Not Required  |
 
 ## Using a custom Bot API server
 
@@ -290,8 +289,6 @@ Edit *[unset.php]* with your bot credentials and execute it.
 
 ## getUpdates installation
 
-For best performance, the MySQL database should be enabled for the `getUpdates` method!
-
 Create *[getUpdatesCLI.php]* with the following contents:
 ```php
 #!/usr/bin/env php
@@ -301,20 +298,9 @@ require __DIR__ . '/vendor/autoload.php';
 $bot_api_key  = 'your:bot_api_key';
 $bot_username = 'username_bot';
 
-$mysql_credentials = [
-   'host'     => 'localhost',
-   'port'     => 3306, // optional
-   'user'     => 'dbuser',
-   'password' => 'dbpass',
-   'database' => 'dbname',
-];
-
 try {
     // Create Telegram API object
     $telegram = new Longman\TelegramBot\Telegram($bot_api_key, $bot_username);
-
-    // Enable MySQL
-    $telegram->enableMySql($mysql_credentials);
 
     // Handle telegram getUpdates request
     $telegram->handleGetUpdates();
@@ -332,13 +318,6 @@ $ chmod +x getUpdatesCLI.php
 Lastly, run it!
 ```bash
 $ ./getUpdatesCLI.php
-```
-
-### getUpdates without database
-
-If you choose to / or are obliged to use the `getUpdates` method without a database, you can replace the `$telegram->enableMySql(...);` line above with:
-```php
-$telegram->useGetUpdatesWithoutDatabase();
 ```
 
 ## Filter Update
@@ -463,59 +442,14 @@ Get the file path and download it. (see *[WhoamiCommand.php]* for a full example
 
 #### Send message to all active chats
 
-To do this you have to enable the MySQL connection.
-Here's an example of use (check [`DB::selectChats()`][DB::selectChats] for parameter usage):
-
-```php
-$results = Request::sendToActiveChats(
-    'sendMessage', // Callback function to execute (see Request.php methods)
-    ['text' => 'Hey! Check out the new features!!'], // Param to evaluate the request
-    [
-        'groups'      => true,
-        'supergroups' => true,
-        'channels'    => false,
-        'users'       => true,
-    ]
-);
-```
-
-You can also broadcast a message to users, from the private chat with your bot. Take a look at the [admin commands](#admin-commands) below.
+This feature is currently disabled due to the removal of database functionality.
 
 ## Utils
 
 ### MySQL storage (Recommended)
 
-If you want to save messages/users/chats for further usage in commands, create a new database (`utf8mb4_unicode_520_ci`), import *[structure.sql]* and enable MySQL support BEFORE `handle()` method:
+Database storage functionality has been removed from this library.
 
-```php
-$mysql_credentials = [
-   'host'     => 'localhost',
-   'port'     => 3306, // optional
-   'user'     => 'dbuser',
-   'password' => 'dbpass',
-   'database' => 'dbname',
-];
-
-$telegram->enableMySql($mysql_credentials);
-```
-
-You can set a custom prefix to all the tables while you are enabling MySQL:
-
-```php
-$telegram->enableMySql($mysql_credentials, $bot_username . '_');
-```
-
-You can also store inline query and chosen inline query data in the database.
-
-#### External Database connection
-
-It is possible to provide the library with an external MySQL PDO connection.
-Here's how to configure it:
-
-```php
-$telegram->enableExternalMySql($external_pdo_connection);
-//$telegram->enableExternalMySql($external_pdo_connection, $table_prefix)
-```
 ### Channels Support
 
 All methods implemented can be used to manage channels.
@@ -566,13 +500,13 @@ $telegram->setCommandConfig('weather', [
 
 ### Admin Commands
 
-Enabling this feature, the bot admin can perform some super user commands like:
-- List all the chats started with the bot */chats*
-- Clean up old database entries */cleanup*
+Some admin commands that relied on database functionality have been disabled or removed:
+- List all the chats started with the bot */chats* (Disabled)
+- Clean up old database entries */cleanup* (Disabled)
 - Show debug information about the bot */debug*
 - Send message to all chats */sendtoall*
 - Post any content to your channels */sendtochannel*
-- Inspect a user or a chat with */whois*
+- Inspect a user or a chat with */whois* (Removed)
 
 Take a look at all default admin commands stored in the *[src/Commands/AdminCommands/][AdminCommands-folder]* folder.
 
@@ -711,8 +645,8 @@ Credit list in [CREDITS](CREDITS)
 [WhoamiCommand.php]: https://github.com/php-telegram-bot/example-bot/blob/master/Commands/WhoamiCommand.php "example /whoami command"
 [HelpCommand.php]: https://github.com/php-telegram-bot/example-bot/blob/master/Commands/HelpCommand.php "example /help command"
 [SendtochannelCommand.php]: https://github.com/php-telegram-bot/core/blob/master/src/Commands/AdminCommands/SendtochannelCommand.php "/sendtochannel admin command"
-[DB::selectChats]: https://github.com/php-telegram-bot/core/blob/0.70.0/src/DB.php#L1148 "DB::selectChats() parameters"
-[structure.sql]: https://github.com/php-telegram-bot/core/blob/master/structure.sql "DB structure for importing"
+[DB::selectChats]: # "DB::selectChats() parameters (Removed)"
+[structure.sql]: # "DB structure for importing (Removed)"
 [Wiki]: https://github.com/php-telegram-bot/core/wiki "PHP Telegram Bot Wiki"
 [wiki-create-your-own-commands]: https://github.com/php-telegram-bot/core/wiki/Create-your-own-commands "Create your own commands"
 [issues]: https://github.com/php-telegram-bot/core/issues "PHP Telegram Bot Issues"
