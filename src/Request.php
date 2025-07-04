@@ -125,8 +125,9 @@ use Throwable;
  * @method static ServerResponse getStickerSet(array $data)                   Use this method to get a sticker set. On success, a StickerSet object is returned.
  * @method static ServerResponse getCustomEmojiStickers(array $data)          Use this method to get information about custom emoji stickers by their identifiers. Returns an Array of Sticker objects.
  * @method static ServerResponse uploadStickerFile(array $data)               Use this method to upload a .png file with a sticker for later use in createNewStickerSet and addStickerToSet methods (can be used multiple times). Returns the uploaded File on success.
- * @method static ServerResponse createNewStickerSet(array $data)             Use this method to create new sticker set owned by a user. The bot will be able to edit the created sticker set. Returns True on success.
+ * @method static ServerResponse createNewStickerSet(array $data)             Use this method to create a new sticker set owned by a user. The bot will be able to edit the sticker set thus created. You must use exactly one of the fields png_sticker, tgs_sticker, or webm_sticker. Returns True on success.
  * @method static ServerResponse addStickerToSet(array $data)                 Use this method to add a new sticker to a set created by the bot. Returns True on success.
+ * @method static ServerResponse replaceStickerInSet(array $data)             Use this method to replace a sticker in a set created by the bot with a new one. The sticker must be in WEBP, TGS, or WEBM format. Returns True on success.
  * @method static ServerResponse setStickerPositionInSet(array $data)         Use this method to move a sticker in a set created by the bot to a specific position. Returns True on success.
  * @method static ServerResponse deleteStickerFromSet(array $data)            Use this method to delete a sticker from a set created by the bot. Returns True on success.
  * @method static ServerResponse setStickerEmojiList(array $data)             Use this method to change the list of emoji assigned to a regular or custom emoji sticker. The sticker must belong to a sticker set created by the bot. Returns True on success.
@@ -308,6 +309,7 @@ class Request
         'uploadStickerFile',
         'createNewStickerSet',
         'addStickerToSet',
+        'replaceStickerInSet',
         'setStickerPositionInSet',
         'deleteStickerFromSet',
         'setStickerEmojiList',
@@ -326,6 +328,7 @@ class Request
         'sendGame',
         'setGameScore',
         'getGameHighScores',
+        'getBusinessConnection',
     ];
 
     /**
@@ -833,10 +836,17 @@ class Request
 
         $responses = [];
 
+        // business_connection_id should be in all split messages
+        $business_connection_id = $data['business_connection_id'] ?? null;
+
         do {
             // Chop off and send the first message.
-            $data['text'] = mb_substr($text, 0, $max_length, $encoding);
-            $responses[]  = self::send('sendMessage', $data);
+            $current_data = $data; // Create a copy to avoid modifying the original $data array in loop
+            $current_data['text'] = mb_substr($text, 0, $max_length, $encoding);
+            if ($business_connection_id !== null) {
+                $current_data['business_connection_id'] = $business_connection_id;
+            }
+            $responses[]  = self::send('sendMessage', $current_data);
 
             // Prepare the next message.
             $text = mb_substr($text, $max_length, null, $encoding);
