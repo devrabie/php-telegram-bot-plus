@@ -7,7 +7,26 @@ Exclamation symbols (:exclamation:) note something of importance e.g. breaking c
 ### Notes
 - [:ledger: View file changes][Unreleased]
 ### Added
+- Bot API 7.2 support. This includes:
+    - Business Account Integration (New entities: `BusinessConnection`, `BusinessMessagesDeleted`; Updated `Update.php`, `Request.php`, `Message.php`)
+    - Business Information Entities (New entities: `BusinessIntro`, `BusinessLocation`, `BusinessOpeningHours`, `BusinessOpeningHoursInterval`; Updated `Chat.php`)
+    - Sticker Pack Modifications (Updated `StickerSet.php`, `InputSticker.php`, `Request.php`)
+    - Request & Shared Object Improvements (New entity: `SharedUser`; Updated `KeyboardButtonRequestUsers.php`, `KeyboardButtonRequestChat.php`, `UsersShared.php`, `ChatShared.php`)
+    - Miscellaneous Changes (New entity: `Birthdate`; Updated `Chat.php`, `Message.php`, `User.php`)
 ### Changed
+### Deprecated
+### Removed
+### Fixed
+### Security
+
+## [1.0.2] - 2025-07-04
+### Notes
+- [:ledger: View file changes][1.0.2]
+- Support for Telegram Bot API 7.2.
+### Added
+- All features from Telegram Bot API 7.2 update (see Unreleased section above for details).
+### Changed
+- Version bumped to 1.0.2.
 ### Deprecated
 ### Removed
 ### Fixed
@@ -694,7 +713,8 @@ Exclamation symbols (:exclamation:) note something of importance e.g. breaking c
 [PSR-3]: https://www.php-fig.org/psr/psr-3
 [Tidelift]: https://tidelift.com/subscription/pkg/packagist-longman-telegram-bot?utm_source=packagist-longman-telegram-bot&utm_medium=referral&utm_campaign=changelog
 
-[Unreleased]: https://github.com/php-telegram-bot/core/compare/master...develop
+[Unreleased]: https://github.com/php-telegram-bot/core/compare/1.0.2...develop
+[1.0.2]: https://github.com/php-telegram-bot/core/compare/0.83.0...1.0.2
 [0.83.0]: https://github.com/php-telegram-bot/core/compare/0.82.0...0.83.0
 [0.82.0]: https://github.com/php-telegram-bot/core/compare/0.81.0...0.82.0
 [0.81.0]: https://github.com/php-telegram-bot/core/compare/0.80.0...0.81.0
