@@ -116,6 +116,7 @@ use Longman\TelegramBot\Entities\Topics\GeneralForumTopicUnhidden;
  * @method string                                 getBusinessConnectionId()                   Optional. Unique identifier of the business connection from which the message was received. If non-empty, the message is business_message.
  * @method User                                   getSenderBusinessBot()                      Optional. The bot that actually sent the message on behalf of the business account. Available only for outgoing messages sent on behalf of the business account.
  * @method bool                                   getIsFromOffline()                          Optional. True, if the message was sent by an offline user. Applicable to messages sent by the bot on behalf of a user to a fellow user in a private chat.
+ * @method ChatBackground                         getChatBackgroundSet()                      Optional. Service message: chat background set
  */
 class Message extends Entity implements MaybeInaccessibleMessage
 {
@@ -181,6 +182,7 @@ class Message extends Entity implements MaybeInaccessibleMessage
             'video_chat_participants_invited'   => VideoChatParticipantsInvited::class,
             'web_app_data'                      => WebAppData::class,
             'reply_markup'                      => InlineKeyboard::class,
+            'chat_background_set'               => ChatBackground::class,
         ];
     }
 
@@ -328,6 +330,7 @@ class Message extends Entity implements MaybeInaccessibleMessage
             'video_chat_participants_invited',
             'web_app_data',
             'reply_markup',
+            'chat_background_set',
         ];
 
         $is_command = $this->getCommand() !== null;
