@@ -115,7 +115,7 @@ use Throwable;
  * @method static ServerResponse getChatMenuButton(array $data)               Use this method to get the current value of the bot's menu button in a private chat, or the default menu button. Returns MenuButton on success.
  * @method static ServerResponse setMyDefaultAdministratorRights(array $data) Use this method to change the default administrator rights requested by the bot when it's added as an administrator to groups or channels. These rights will be suggested to users, but they are are free to modify the list before adding the bot. Returns True on success.
  * @method static ServerResponse getMyDefaultAdministratorRights(array $data) Use this method to get the current default administrator rights of the bot. Returns ChatAdministratorRights on success.
- * @method static ServerResponse editMessageText(array $data)                 Use this method to edit text and game messages sent by the bot or via the bot (for inline bots). On success, if edited message is sent by the bot, the edited Message is returned, otherwise True is returned.
+ * @method static ServerResponse editMessageText(array $data)                 Use this method to edit text and game messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
  * @method static ServerResponse editMessageCaption(array $data)              Use this method to edit captions of messages sent by the bot or via the bot (for inline bots). On success, if edited message is sent by the bot, the edited Message is returned, otherwise True is returned.
  * @method static ServerResponse editMessageMedia(array $data)                Use this method to edit audio, document, photo, or video messages. On success, if the edited message was sent by the bot, the edited Message is returned, otherwise True is returned.
  * @method static ServerResponse editMessageReplyMarkup(array $data)          Use this method to edit only the reply markup of messages sent by the bot or via the bot (for inline bots). On success, if edited message is sent by the bot, the edited Message is returned, otherwise True is returned.
@@ -329,6 +329,8 @@ class Request
         'setGameScore',
         'getGameHighScores',
         'getBusinessConnection',
+        'sendPaidMedia',
+        'getStarTransactions',
     ];
 
     /**
@@ -815,10 +817,24 @@ class Request
      *
      * @link https://core.telegram.org/bots/api#sendmessage
      *
-     * @todo Splitting formatted text may break the message.
-     *
-     * @param array      $data
+     * @param array $data {
+     *     @var int|string             $chat_id
+     *     @var string                 $text
+     *     @var string                 $parse_mode
+     *     @var Entities\MessageEntity[] $entities
+     *     @var Entities\LinkPreviewOptions $link_preview_options Optional. Link preview generation options for the message
+     *     @var bool                   $disable_notification
+     *     @var bool                   $protect_content
+     *     @var int                    $reply_to_message_id
+     *     @var bool                   $allow_sending_without_reply
+     *     @var Entities\InlineKeyboard|Entities\ReplyKeyboard|Entities\ReplyKeyboardRemove|Entities\ForceReply $reply_markup
+     *     @var string                 $business_connection_id      Optional. Unique identifier of the business connection on behalf of which the message will be sent
+     *     @var int                    $message_thread_id           Optional. Unique identifier for the target message thread (topic) of the forum; for forum supergroups only
+     *     @var bool                   $disable_web_page_preview    Optional. Disables link previews for links in this message (deprecated, use link_preview_options instead)
+     * }
      * @param array|null $extras
+     *
+     * @todo Splitting formatted text may break the message.
      *
      * @return ServerResponse
      * @throws TelegramException
@@ -1006,5 +1022,47 @@ class Request
     public static function kickChatMember(array $data = []): ServerResponse
     {
         return static::banChatMember($data);
+    }
+
+    /**
+     * Use this method to send paid media. On success, the sent Message is returned.
+     *
+     * @link https://core.telegram.org/bots/api#sendpaidmedia
+     *
+     * @param  array $data
+     * @return ServerResponse
+     * @throws TelegramException
+     */
+    public static function sendPaidMedia(array $data): ServerResponse
+    {
+        return static::send('sendPaidMedia', $data);
+    }
+
+    /**
+     * Returns the bot's Telegram Star transactions in chronological order.
+     *
+     * @link https://core.telegram.org/bots/api#getstartransactions
+     *
+     * @param  array $data
+     * @return ServerResponse
+     * @throws TelegramException
+     */
+    public static function getStarTransactions(array $data): ServerResponse
+    {
+        return static::send('getStarTransactions', $data);
+    }
+
+    /**
+     * Use this method to change the bot's menu button in a private chat, or the default menu button.
+     *
+     * @link https://core.telegram.org/bots/api#setchatmenubutton
+     *
+     * @param  array $data
+     * @return ServerResponse
+     * @throws TelegramException
+     */
+    public static function setChatMenuButton(array $data): ServerResponse
+    {
+        return static::send('setChatMenuButton', $data);
     }
 }
