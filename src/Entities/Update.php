@@ -42,6 +42,7 @@ use Longman\TelegramBot\Entities\Payments\ShippingQuery;
  * @method Message                     getBusinessMessage()        Optional. New message from a connected business account
  * @method Message                     getEditedBusinessMessage()  Optional. New version of a message from a connected business account
  * @method BusinessMessagesDeleted     getDeletedBusinessMessages() Optional. Messages were deleted from a connected business account
+ * @method StarTransaction             getTransaction()            Optional. New incoming transaction; for bots only
  */
 class Update extends Entity
 {
@@ -67,6 +68,7 @@ class Update extends Entity
     public const TYPE_BUSINESS_MESSAGE         = 'business_message';
     public const TYPE_EDITED_BUSINESS_MESSAGE  = 'edited_business_message';
     public const TYPE_DELETED_BUSINESS_MESSAGES = 'deleted_business_messages';
+    public const TYPE_TRANSACTION              = 'transaction';
 
     /**
      * {@inheritdoc}
@@ -96,6 +98,7 @@ class Update extends Entity
             self::TYPE_BUSINESS_MESSAGE         => Message::class,
             self::TYPE_EDITED_BUSINESS_MESSAGE  => Message::class,
             self::TYPE_DELETED_BUSINESS_MESSAGES => BusinessMessagesDeleted::class,
+            self::TYPE_TRANSACTION              => StarTransaction::class,
         ];
     }
 
