@@ -28,5 +28,89 @@ Our goal is to be a drop-in replacement for existing users, while providing powe
 composer require devrabie/php-telegram-bot-plus
 ```
 
+## 🚀 Using the Redis Helper
+
+This library provides a simple helper to integrate a [Predis](https://github.com/predis/predis) client, allowing you to easily use Redis for your custom data persistence needs (e.g., storing user states, settings, caching). The library itself remains stateless.
+
+### 1. Enable Redis
+
+In your main bot file (e.g., `hook.php` or your script that handles updates):
+
+```php
+<?php
+
+require_once __DIR__ . '/vendor/autoload.php';
+
+$bot_api_key  = 'YOUR_BOT_API_KEY';
+$bot_username = 'YOUR_BOT_USERNAME';
+
+$telegram = new Longman\TelegramBot\Telegram($bot_api_key, $bot_username);
+
+// Initialize the Redis client and make it available to all commands
+// Default connection: tcp://127.0.0.1:6379
+$telegram->enableRedis();
+
+// Or with custom connection parameters:
+// $telegram->enableRedis([
+//    'scheme' => 'tcp',
+//    'host'   => 'your-redis-host',
+//    'port'   => 6379,
+//    // 'password' => 'your-redis-password'
+// ]);
+
+// Handle updates
+$telegram->handle();
+```
+
+### 2. Use Redis in Your Commands
+
+You can access the shared Redis client instance from any command class using `getRedis()`:
+
+```php
+<?php
+
+namespace Longman\TelegramBot\Commands\UserCommands;
+
+use Longman\TelegramBot\Commands\UserCommand;
+use Longman\TelegramBot\Request;
+
+class SettingsCommand extends UserCommand
+{
+    protected $name = 'settings';
+    protected $description = 'Manage user settings using Redis';
+    protected $usage = '/settings';
+    protected $version = '1.0.0';
+
+    public function execute()
+    {
+        $message = $this->getMessage();
+        $chat_id = $message->getChat()->getId();
+
+        // Get the shared Redis client instance.
+        /** @var \Predis\Client|null $redis */
+        $redis = $this->getTelegram()->getRedis();
+
+        if ($redis) {
+            $settings_key = 'bot:settings:' . $chat_id;
+
+            // Example: Use Redis to store custom settings for a chat
+            $redis->hset($settings_key, 'language', 'en');
+            $lang = $redis->hget($settings_key, 'language');
+
+            $text = 'Language set to: ' . $lang . ' (using Redis!)';
+        } else {
+            $text = 'Redis is not enabled.';
+        }
+
+        return Request::sendMessage([
+            'chat_id' => $chat_id,
+            'text'    => $text,
+        ]);
+    }
+}
+```
+
+---
+
 🙏 Acknowledgments
 A huge thanks to the original developers of longman/php-telegram-bot for their incredible work that formed the foundation of this project.
