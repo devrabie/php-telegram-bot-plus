@@ -41,7 +41,6 @@
         "ext-json": "*",
         "ext-mbstring": "*",
         "guzzlehttp/guzzle": "^6.0|^7.0",
-        "predis/predis": "^2.0",
         "psr/log": "^1.1|^2.0|^3.0"
     },
     "require-dev": {

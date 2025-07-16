@@ -28,7 +28,6 @@ use Longman\TelegramBot\Exception\TelegramException;
 use RecursiveDirectoryIterator;
 use RecursiveIteratorIterator;
 use RegexIterator;
-use Predis\Client as PredisClient;
 
 class Telegram
 {
@@ -39,8 +38,8 @@ class Telegram
      */
     protected $version = '1.0.5';
 
-    /** @var PredisClient|null */
-    private $redis_connection;
+    /** @var \Redis|null */
+    private static $redis_connection;
 
     /**
      * Telegram API key
@@ -329,6 +328,16 @@ class Telegram
 
             if ($command_class) {
                 $command_obj = new $command_class($this, $this->update);
+
+                // Automatic dependency injection for Redis
+                if (self::$redis_connection) {
+                    $reflection = new \ReflectionClass($command_obj);
+                    if ($reflection->hasProperty('redis')) {
+                        $redis_property = $reflection->getProperty('redis');
+                        $redis_property->setAccessible(true);
+                        $redis_property->setValue($command_obj, self::$redis_connection);
+                    }
+                }
 
                 if ($auth === Command::AUTH_SYSTEM && $command_obj instanceof SystemCommand) {
                     return $command_obj;
@@ -1092,23 +1101,25 @@ class Telegram
     {
         if (empty($config)) {
             $config = [
-                'scheme' => 'tcp',
                 'host'   => '127.0.0.1',
                 'port'   => 6379,
             ];
         }
-        $this->redis_connection = new PredisClient($config);
+
+        self::$redis_connection = new \Redis();
+        self::$redis_connection->connect($config['host'], $config['port']);
+
         return $this;
     }
 
     /**
-     * Get the shared Predis client instance.
+     * Get the shared Redis client instance.
      *
-     * @return PredisClient|null
+     * @return \Redis|null
      */
-    public function getRedis(): ?PredisClient
+    public static function getRedis(): ?\Redis
     {
-        return $this->redis_connection;
+        return self::$redis_connection;
     }
 
     /**
