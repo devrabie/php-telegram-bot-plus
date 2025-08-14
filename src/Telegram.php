@@ -36,7 +36,7 @@ class Telegram
      *
      * @var string
      */
-    protected $version = '1.0.5';
+    protected $version = '1.0.7';
 
     /** @var \Redis|null */
     private static $redis_connection;
