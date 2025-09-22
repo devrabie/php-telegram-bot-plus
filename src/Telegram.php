@@ -1109,6 +1109,10 @@ class Telegram
         self::$redis_connection = new \Redis();
         self::$redis_connection->connect($config['host'], $config['port']);
 
+        if (!empty($config['password'])) {
+            self::$redis_connection->auth($config['password']);
+        }
+
         return $this;
     }
 
