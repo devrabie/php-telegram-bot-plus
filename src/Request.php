@@ -1065,4 +1065,14 @@ class Request
     {
         return static::send('setChatMenuButton', $data);
     }
+
+    /**
+     * Get the secret token header from the request
+     *
+     * @return string|null
+     */
+    public static function getSecretTokenHeader(): ?string
+    {
+        return $_SERVER['HTTP_X_TELEGRAM_BOT_API_SECRET_TOKEN'] ?? null;
+    }
 }
