@@ -70,6 +70,13 @@ class Telegram
     protected $input = '';
 
     /**
+     * Secret token to authorise webhook requests
+     *
+     * @var string
+     */
+    protected $secret_token = '';
+
+    /**
      * Custom commands paths
      *
      * @var array
@@ -500,6 +507,10 @@ class Telegram
     {
         if ($this->bot_username === '') {
             throw new TelegramException('Bot Username is not defined!');
+        }
+
+        if ($this->secret_token !== '' && $this->secret_token !== Request::getSecretTokenHeader()) {
+            throw new TelegramException('Secret token is invalid!');
         }
 
         $input = Request::getInput();
@@ -1279,6 +1290,20 @@ class Telegram
     public function getUpdateFilter(): ?callable
     {
         return $this->update_filter;
+    }
+
+    /**
+     * Set the secret token to be used for webhook verification
+     *
+     * @param string $secret_token
+     *
+     * @return Telegram
+     */
+    public function setSecretToken(string $secret_token): Telegram
+    {
+        $this->secret_token = $secret_token;
+
+        return $this;
     }
 
     /**
