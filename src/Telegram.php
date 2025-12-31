@@ -558,6 +558,17 @@ class Telegram
         $this->update         = $update;
         $this->last_update_id = $update->getUpdateId();
 
+        // If Redis is enabled, check if this update has already been processed.
+        if (self::$redis_connection) {
+            $redis_key = 'telegram_update_' . $this->last_update_id;
+            if (self::$redis_connection->get($redis_key)) {
+                // Return a fake success response to prevent Telegram from retrying.
+                return new ServerResponse(['ok' => true, 'result' => true], $this->bot_username);
+            }
+            // Store the update ID in Redis with a TTL of 60 seconds (matching the default timeout).
+            self::$redis_connection->setex($redis_key, 60, '1');
+        }
+
         if (is_callable($this->update_filter)) {
             $reason = 'Update denied by update_filter';
             try {
@@ -1117,14 +1128,27 @@ class Telegram
             ];
         }
 
-        self::$redis_connection = new \Redis();
-        self::$redis_connection->connect($config['host'], $config['port']);
+        $redis = new \Redis();
+        $redis->connect($config['host'], $config['port']);
 
         if (!empty($config['password'])) {
-            self::$redis_connection->auth($config['password']);
+            $redis->auth($config['password']);
         }
 
+        self::$redis_connection = $redis;
+
         return $this;
+    }
+
+    /**
+     * Set a custom Redis connection
+     *
+     * @param \Redis $redis
+     * @return void
+     */
+    public static function setRedis(\Redis $redis): void
+    {
+        self::$redis_connection = $redis;
     }
 
     /**
