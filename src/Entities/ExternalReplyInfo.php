@@ -30,6 +30,7 @@ namespace Longman\TelegramBot\Entities;
  * @method VideoNote          getVideoNote()          Optional. Message is a video note, information about the video message
  * @method Voice              getVoice()              Optional. Message is a voice message, information about the file
  * @method bool               getHasMediaSpoiler()    Optional. True, if the message media is covered by a spoiler animation
+ * @method Checklist          getChecklist()          Optional. Message is a checklist
  * @method Contact            getContact()            Optional. Message is a shared contact, information about the contact
  * @method Dice               getDice()               Optional. Message is a dice with random value
  * @method Game               getGame()               Optional. Message is a game, information about the game. More about games »
@@ -60,6 +61,7 @@ class ExternalReplyInfo extends Entity
             'video'                => Video::class,
             'video_note'           => VideoNote::class,
             'voice'                => Voice::class,
+            'checklist'            => Checklist::class,
             'contact'              => Contact::class,
             'dice'                 => Dice::class,
             'game'                 => Game::class,

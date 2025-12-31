@@ -28,6 +28,7 @@ use Longman\TelegramBot\Entities\User;
  * @method bool   getCanEditStories()      Optional. True, if the administrator can edit stories posted by other users; channels only
  * @method bool   getCanDeleteStories()    Optional. True, if the administrator can delete stories posted by other users; channels only
  * @method bool   getCanManageTopics()     Optional. True, if the user is allowed to create, rename, close, and reopen forum topics; supergroups only
+ * @method bool   getCanManageDirectMessages() Optional. True, if the administrator can manage direct messages of the channel and decline suggested posts; for channels only
  * @method string getCustomTitle()         Custom title for this user
  */
 class ChatMemberAdministrator extends Entity implements ChatMember
