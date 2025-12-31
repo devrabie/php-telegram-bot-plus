@@ -23,8 +23,18 @@ namespace Longman\TelegramBot\Entities;
  * @method int    getDate()         Date the connection was established in Unix time
  * @method bool   getCanReply()     True, if the bot can act on behalf of the business account in chats that were active in the last 24 hours
  * @method bool   getIsEnabled()    True, if the business connection is active
+ * @method BusinessBotRights getRights() Optional. Rights of the business bot
  */
 class BusinessConnection extends Entity
 {
-
+    /**
+     * {@inheritdoc}
+     */
+    protected function subEntities(): array
+    {
+        return [
+            'user'   => User::class,
+            'rights' => BusinessBotRights::class,
+        ];
+    }
 }

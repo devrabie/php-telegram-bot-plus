@@ -28,6 +28,7 @@ use Longman\TelegramBot\Entities\ReactionType\ReactionType;
  * @method string          getFirstName()                          Optional. First name of the other party in a private chat
  * @method string          getLastName()                           Optional. Last name of the other party in a private chat
  * @method bool            getIsForum()                            Optional. True, if the supergroup chat is a forum (has topics enabled)
+ * @method bool            getIsDirectMessages()                   Optional. True, if the chat is the direct messages chat of a channel
  * @method int             getAccentColorId()                      Identifier of the accent color for the chat name and backgrounds of the chat photo, reply header, and link preview. See accent colors for more details.
  * @method ChatPhoto       getPhoto()                              Optional. Chat photo. Returned only in getChat.
  * @method string[]        getActiveUsernames()                    Optional. If non-empty, the list of all active chat usernames; for private chats, supergroups and channels. Returned only in getChat.
