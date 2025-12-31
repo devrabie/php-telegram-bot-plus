@@ -192,6 +192,13 @@ class Request
     private static $limiter_interval;
 
     /**
+     * Guzzle Client timeout
+     *
+     * @var int
+     */
+    private static $timeout = 60;
+
+    /**
      * The current action that is being executed
      *
      * @var string
@@ -426,6 +433,16 @@ class Request
     }
 
     /**
+     * Set a custom Guzzle Client timeout
+     *
+     * @param int $timeout
+     */
+    public static function setClientTimeout(int $timeout): void
+    {
+        self::$timeout = $timeout;
+    }
+
+    /**
      * Get input from custom input or stdin and return it
      *
      * @return string
@@ -614,8 +631,9 @@ class Request
      */
     public static function execute(string $action, array $data = []): string
     {
-        $request_params          = self::setUpRequestParams($data);
-        $request_params['debug'] = TelegramLog::getDebugLogTempStream();
+        $request_params            = self::setUpRequestParams($data);
+        $request_params['debug']   = TelegramLog::getDebugLogTempStream();
+        $request_params['timeout'] = self::$timeout;
 
         try {
             $response = self::$client->post(
