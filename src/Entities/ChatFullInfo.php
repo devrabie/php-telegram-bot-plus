@@ -41,6 +41,7 @@ namespace Longman\TelegramBot\Entities;
  * @method AcceptedGiftTypes getAcceptedGiftTypes()                Optional. Information about types of gifts that are accepted by the chat or by the corresponding user for private chats
  * @method bool            getCanSendPaidMedia()                   Optional. True, if paid media messages can be sent or forwarded to the channel chat. The field is available only for channel chats.
  * @method int             getPaidMessageStarCount()               Optional. The number of Telegram Stars a general user have to pay to send a message to the chat
+ * @method Audio           getFirstProfileAudio()                  Optional. The first audio in the user's profile
  */
 class ChatFullInfo extends Chat
 {
@@ -54,6 +55,7 @@ class ChatFullInfo extends Chat
             'rating'              => UserRating::class,
             'unique_gift_colors'  => UniqueGiftColors::class,
             'accepted_gift_types' => AcceptedGiftTypes::class,
+            'first_profile_audio' => Audio::class,
         ]);
     }
 }

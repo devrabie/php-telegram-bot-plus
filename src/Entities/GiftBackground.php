@@ -12,6 +12,7 @@ namespace Longman\TelegramBot\Entities;
  * @method int getCenterColor() Center color of the background in RGB format
  * @method int getEdgeColor()   Edge color of the background in RGB format
  * @method int getTextColor()   Text color of the background in RGB format
+ * @method string getRarity()   Optional. The rarity of the gift background
  */
 class GiftBackground extends Entity
 {

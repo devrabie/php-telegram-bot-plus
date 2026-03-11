@@ -11,6 +11,8 @@
 
 namespace Longman\TelegramBot\Entities;
 
+use Longman\TelegramBot\Entities\MessageOrigin\Factory as MessageOriginFactory;
+
 /**
  * This object contains information about a message that is being replied to, which may come from another chat or forum topic.
  *
@@ -40,6 +42,7 @@ namespace Longman\TelegramBot\Entities;
  * @method Location           getLocation()           Optional. Message is a shared location, information about the location
  * @method Poll               getPoll()               Optional. Message is a native poll, information about the poll
  * @method Venue              getVenue()              Optional. Message is a venue, information about the venue
+ * @method PaidMediaInfo      getPaidMedia()          Optional. Message is a paid media purchase, information about the paid media
  */
 class ExternalReplyInfo extends Entity
 {
@@ -49,7 +52,7 @@ class ExternalReplyInfo extends Entity
     protected function subEntities(): array
     {
         return [
-            'origin'               => MessageOrigin::class,
+            'origin'               => MessageOriginFactory::class,
             'chat'                 => Chat::class,
             'link_preview_options' => LinkPreviewOptions::class,
             'animation'            => Animation::class,
@@ -71,6 +74,7 @@ class ExternalReplyInfo extends Entity
             'location'             => Location::class,
             'poll'                 => Poll::class,
             'venue'                => Venue::class,
+            'paid_media'           => PaidMediaInfo::class,
         ];
     }
 }

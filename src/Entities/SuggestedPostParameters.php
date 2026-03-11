@@ -5,22 +5,14 @@ namespace Longman\TelegramBot\Entities;
 /**
  * Class SuggestedPostParameters
  *
- * Contains parameters of a post that is being suggested by the bot.
+ * This object describes parameters for a suggested post.
  *
  * @link https://core.telegram.org/bots/api#suggestedpostparameters
  *
- * @method SuggestedPostPrice getPrice()    Optional. Proposed price for the post. If the field is omitted, then the post is unpaid.
- * @method int                getSendDate() Optional. Proposed send date of the post. If specified, then the date must be between 300 second and 2678400 seconds (30 days) in the future. If the field is omitted, then the post can be published at any time within 30 days at the sole discretion of the user who approves it.
+ * @method int    getDirectMessagesTopicId() Optional. Unique identifier of the direct messages chat topic where the post is suggested
+ * @method string getAuthorSignature()       Optional. For channel direct messages chats only, the signature of the suggested post author
+ * @method bool   getIsPaidPost()            Optional. For channel direct messages chats only, True if the post is a paid post
  */
 class SuggestedPostParameters extends Entity
 {
-    /**
-     * {@inheritdoc}
-     */
-    protected function subEntities(): array
-    {
-        return [
-            'price' => SuggestedPostPrice::class,
-        ];
-    }
 }
