@@ -7,8 +7,12 @@ Exclamation symbols (:exclamation:) note something of importance e.g. breaking c
 ### Notes
 - [:ledger: View file changes][Unreleased]
 - [API 9.3 Features Documentation](API_9.3_FEATURES.md)
-- Support for Telegram Bot API 7.4 through 9.3.
+- [API 9.4 Features Documentation](API_9.4_FEATURES.md)
+- [API 9.5 Features Documentation](API_9.5_FEATURES.md)
+- Support for Telegram Bot API 7.4 through 9.5.
 ### Added
+- **API 9.5:** Added `date_time` MessageEntity, Chat Member Tags support (`setChatMemberTag`), and `sender_tag` in Message.
+- **API 9.4:** Support for Bot Profile Photo management (`setMyProfilePhoto`, `removeMyProfilePhoto`), Video Qualities, and Private Chat Topic creation.
 - **Private Chat Topics:** Support for forum topics in private chats.
 - **Message Streaming:** Added `sendMessageDraft` for streaming partial messages.
 - **Gifts Enhancement:** Added `getUserGifts`, `getChatGifts`, and support for Unique Gifts with colors and blockchain info.
