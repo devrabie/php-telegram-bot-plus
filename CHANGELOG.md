@@ -6,10 +6,24 @@ Exclamation symbols (:exclamation:) note something of importance e.g. breaking c
 ## [Unreleased]
 ### Notes
 - [:ledger: View file changes][Unreleased]
+- [API 9.3 Features Documentation](API_9.3_FEATURES.md)
+- Support for Telegram Bot API 7.4 through 9.3.
 ### Added
+- **Private Chat Topics:** Support for forum topics in private chats.
+- **Message Streaming:** Added `sendMessageDraft` for streaming partial messages.
+- **Gifts Enhancement:** Added `getUserGifts`, `getChatGifts`, and support for Unique Gifts with colors and blockchain info.
+- **Business Accounts:** Complete support for managed business accounts, including story reposting, checklist management, and profile settings.
+- **Telegram Stars:** Full support for Star transactions, subscriptions, and affiliate programs.
+- **Channel Direct Messages:** Support for direct messages in channels and suggested posts.
+- **New Entities:** `VideoQuality`, `UserRating`, `AffiliateInfo`, `StarTransaction`, `PaidMediaPurchased`, `PreparedInlineMessage`, `WebAppUser`, `ChatOwnerLeft`, `ChatOwnerChanged`, `UserProfileAudios`.
+- **New Request Methods:** `repostStory`, `verifyUser`, `verifyChat`, `removeUserVerification`, `removeChatVerification`, `createChatSubscriptionInviteLink`, `editChatSubscriptionInviteLink`, `editUserStarSubscription`, `refundStarPayment`, `savePreparedInlineMessage`.
 ### Changed
+- Updated `User`, `Message`, `Chat`, `ChatFullInfo`, `Poll`, `InlineKeyboardButton`, `KeyboardButton`, and many other entities with new fields.
+- Replaced `last_resale_star_count` with `last_resale_currency` and `last_resale_amount` in `UniqueGiftInfo`.
 ### Deprecated
 ### Removed
+- Deprecated `hide_url` from `InlineQueryResultArticle`.
+- Replaced fields in `UniqueGiftInfo` as per API 9.3.
 ### Fixed
 ### Security
 

@@ -23,6 +23,23 @@ namespace Longman\TelegramBot\Entities;
  * @method bool getCanTransferAndUpgradeGifts()  Optional. True, if the bot can transfer and upgrade gifts owned by the business account
  * @method bool getCanTransferStars()            Optional. True, if the bot can transfer Telegram Stars received by the business account to its own account, or use them to upgrade and transfer gifts
  * @method bool getCanManageStories()            Optional. True, if the bot can post, edit and delete stories on behalf of the business account
+ * @method bool getCanManageChecklists()         Optional. True, if the bot can send and edit checklists on behalf of the business account
+ *
+ * @method $this setCanReply(bool $can_reply)
+ * @method $this setCanReadMessages(bool $can_read_messages)
+ * @method $this setCanDeleteSentMessages(bool $can_delete_sent_messages)
+ * @method $this setCanDeleteAllMessages(bool $can_delete_all_messages)
+ * @method $this setCanEditName(bool $can_edit_name)
+ * @method $this setCanEditBio(bool $can_edit_bio)
+ * @method $this setCanEditProfilePhoto(bool $can_edit_profile_photo)
+ * @method $this setCanEditUsername(bool $can_edit_username)
+ * @method $this setCanChangeGiftSettings(bool $can_change_gift_settings)
+ * @method $this setCanViewGiftsAndStars(bool $can_view_gifts_and_stars)
+ * @method $this setCanConvertGiftsToStars(bool $can_convert_gifts_to_stars)
+ * @method $this setCanTransferAndUpgradeGifts(bool $can_transfer_and_upgrade_gifts)
+ * @method $this setCanTransferStars(bool $can_transfer_stars)
+ * @method $this setCanManageStories(bool $can_manage_stories)
+ * @method $this setCanManageChecklists(bool $can_manage_checklists)
  */
 class BusinessBotRights extends Entity
 {

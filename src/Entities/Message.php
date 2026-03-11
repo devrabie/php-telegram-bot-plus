@@ -43,6 +43,7 @@ use Longman\TelegramBot\Entities\Topics\GeneralForumTopicUnhidden;
  * @method User                                   getFrom()                                   Optional. Sender, can be empty for messages sent to channels
  * @method Chat                                   getSenderChat()                             Optional. Sender of the message, sent on behalf of a chat. The channel itself for channel messages. The supergroup itself for messages from anonymous group administrators. The linked channel for messages automatically forwarded to the discussion group
  * @method int                                    getSenderBoostCount()                       Optional. If the sender of the message boosted the chat, the number of boosts added by the user
+ * @method string                                 getSenderTag()                              Optional. The bot-specified tag for the message sender; for channels only
  * @method int                                    getDate()                                   Date the message was sent in Unix time
  * @method Chat                                   getChat()                                   Conversation the message belongs to
  * @method MessageOrigin                          getForwardOrigin()                          Optional. Information about the original message for forwarded messages
@@ -75,6 +76,7 @@ use Longman\TelegramBot\Entities\Topics\GeneralForumTopicUnhidden;
  * @method VideoNote                              getVideoNote()                              Optional. Message is a video note message, information about the video
  * @method string                                 getCaption()                                Optional. Caption for the document, photo or video, 0-200 characters
  * @method bool                                   getHasMediaSpoiler()                        Optional. True, if the message media is covered by a spoiler animation
+ * @method bool                                   getShowCaptionAboveMedia()                  Optional. True, if the caption must be shown above the message media
  * @method Checklist                              getChecklist()                              Optional. Message is a checklist
  * @method Contact                                getContact()                                Optional. Message is a shared contact, information about the contact
  * @method Location                               getLocation()                               Optional. Message is a shared location, information about the location
@@ -125,6 +127,10 @@ use Longman\TelegramBot\Entities\Topics\GeneralForumTopicUnhidden;
  * @method ChecklistTasksDone                     getChecklistTasksDone()                     Optional. Service message: some tasks in a checklist were marked as done or not done
  * @method ChecklistTasksAdded                    getChecklistTasksAdded()                    Optional. Service message: tasks were added to a checklist
  * @method DirectMessagePriceChanged              getDirectMessagePriceChanged()              Optional. Service message: the price for paid messages in the corresponding direct messages chat of a channel has changed
+ * @method string                                 getMessageEffectId()                        Optional. Unique identifier of the message effect added to the message
+ * @method ChatOwnerLeft                          getChatOwnerLeft()                          Optional. Service message: the chat owner left the chat
+ * @method ChatOwnerChanged                       getChatOwnerChanged()                       Optional. Service message: the chat owner was changed
+ * @method bool                                   getIsPaidPost()                             Optional. True, if the message is a paid post
  *
  * @method PaidMediaInfo                          getPaidMedia()                              Optional. Message is a paid media purchase, information about the paid media
  * @method StarTransaction                        getTransaction()                            Optional. Message is a service message about a successful payment, information about the payment.
@@ -226,6 +232,8 @@ class Message extends Entity implements MaybeInaccessibleMessage
             'suggested_post_declined'           => SuggestedPostDeclined::class,
             'suggested_post_paid'               => SuggestedPostPaid::class,
             'suggested_post_refunded'           => SuggestedPostRefunded::class,
+            'chat_owner_left'                   => ChatOwnerLeft::class,
+            'chat_owner_changed'                => ChatOwnerChanged::class,
         ];
     }
 
@@ -374,6 +382,8 @@ class Message extends Entity implements MaybeInaccessibleMessage
             'web_app_data',
             'reply_markup',
             'chat_background_set',
+            'chat_owner_left',
+            'chat_owner_changed',
         ];
 
         $is_command = $this->getCommand() !== null;

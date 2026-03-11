@@ -19,7 +19,7 @@ namespace Longman\TelegramBot\Entities;
  * @link https://core.telegram.org/bots/api#poll
  *
  * @method string          getId()                    Unique poll identifier
- * @method string          getQuestion()              Poll question, 1-255 characters
+ * @method string          getQuestion()              Poll question, 1-300 characters
  * @method PollOption[]    getOptions()               List of poll options
  * @method int             getTotalVoterCount()       Total number of users that voted in the poll
  * @method bool            getIsClosed()              True, if the poll is closed

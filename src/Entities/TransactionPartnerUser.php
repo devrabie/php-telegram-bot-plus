@@ -19,6 +19,7 @@ namespace Longman\TelegramBot\Entities;
  * @method string        getPaidMediaPayload()            Optional. Bot-specified paid media payload. Can be available only for “paid_media_payment” transactions.
  * @method Gift          getGift()                        Optional. The gift sent to the user by the bot; for “gift_purchase” transactions only
  * @method int           getPremiumSubscriptionDuration() Optional. Number of months the gifted Telegram Premium subscription will be active for; for “premium_purchase” transactions only
+ * @method Gift          getPaidGift()                    Optional. The gift bought by the user; for “paid_media_payment” transactions only
  */
 class TransactionPartnerUser extends Entity implements TransactionPartner
 {
@@ -32,6 +33,7 @@ class TransactionPartnerUser extends Entity implements TransactionPartner
             'affiliate'  => AffiliateInfo::class,
             'paid_media' => [PaidMedia\PaidMedia::class],
             'gift'       => Gift::class,
+            'paid_gift'  => Gift::class,
         ];
     }
 }

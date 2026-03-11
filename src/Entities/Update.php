@@ -43,6 +43,7 @@ use Longman\TelegramBot\Entities\Payments\ShippingQuery;
  * @method Message                     getEditedBusinessMessage()  Optional. New version of a message from a connected business account
  * @method BusinessMessagesDeleted     getDeletedBusinessMessages() Optional. Messages were deleted from a connected business account
  * @method StarTransaction             getTransaction()            Optional. New incoming transaction; for bots only
+ * @method PaidMediaPurchased          getPurchasedPaidMedia()     Optional. A user purchased paid media with a payload for the bot
  */
 class Update extends Entity
 {
@@ -69,6 +70,7 @@ class Update extends Entity
     public const TYPE_EDITED_BUSINESS_MESSAGE  = 'edited_business_message';
     public const TYPE_DELETED_BUSINESS_MESSAGES = 'deleted_business_messages';
     public const TYPE_TRANSACTION              = 'transaction';
+    public const TYPE_PURCHASED_PAID_MEDIA     = 'purchased_paid_media';
 
     /**
      * {@inheritdoc}
@@ -99,6 +101,7 @@ class Update extends Entity
             self::TYPE_EDITED_BUSINESS_MESSAGE  => Message::class,
             self::TYPE_DELETED_BUSINESS_MESSAGES => BusinessMessagesDeleted::class,
             self::TYPE_TRANSACTION              => StarTransaction::class,
+            self::TYPE_PURCHASED_PAID_MEDIA     => PaidMediaPurchased::class,
         ];
     }
 
@@ -131,7 +134,7 @@ class Update extends Entity
     /**
      * Get update content
      *
-     * @return Message|EditedMessage|ChannelPost|EditedChannelPost|MessageReactionUpdated|MessageReactionCountUpdated|InlineQuery|ChosenInlineResult|CallbackQuery|ShippingQuery|PreCheckoutQuery|Poll|PollAnswer|ChatMemberUpdated|ChatJoinRequest|ChatBoostUpdated|ChatBoostRemoved
+     * @return Message|EditedMessage|ChannelPost|EditedChannelPost|MessageReactionUpdated|MessageReactionCountUpdated|InlineQuery|ChosenInlineResult|CallbackQuery|ShippingQuery|PreCheckoutQuery|Poll|PollAnswer|ChatMemberUpdated|ChatJoinRequest|ChatBoostUpdated|ChatBoostRemoved|BusinessConnection|BusinessMessagesDeleted|StarTransaction|PaidMediaPurchased
      */
     public function getUpdateContent()
     {
