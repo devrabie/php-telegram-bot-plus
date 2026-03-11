@@ -1265,7 +1265,7 @@ class DB
      * @return array|bool Array containing TOTAL and CURRENT fields or false on invalid arguments
      * @throws TelegramException
      */
-    public static function getTelegramRequestCount(int $chat_id = null, string $inline_message_id = null)
+    public static function getTelegramRequestCount(?int $chat_id = null, ?string $inline_message_id = null)
     {
         if (!self::isDbConnected()) {
             return false;
