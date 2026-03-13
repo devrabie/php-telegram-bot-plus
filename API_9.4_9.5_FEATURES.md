@@ -107,6 +107,14 @@ if ($response->isOk()) {
 }
 ```
 
+- `first_profile_audio`: في كائن `ChatFullInfo` (للدردشات الخاصة)، يمثل أول ملف صوتي في ملف تعريف المستخدم.
+
+```php
+// جلب أول صوت في الملف الشخصي من معلومات الدردشة الكاملة
+$chat_info = Request::getChat(['chat_id' => $user_id])->getResult();
+$first_audio = $chat_info->getFirstProfileAudio();
+```
+
 ### 5. ميزات الهدايا (Gifts)
-- إضافة حقل `rarity` لنماذج الهدايا الفريدة.
-- إضافة حقل `is_burned` للهدايا التي تم استخدامها في نظام الصياغة (Crafting).
+- إضافة حقل `rarity` لنماذج الهدايا الفريدة (`UniqueGiftModel`).
+- إضافة حقل `is_burned` للهدايا الفريدة (`UniqueGift`) التي تم استخدامها في نظام الصياغة (Crafting).

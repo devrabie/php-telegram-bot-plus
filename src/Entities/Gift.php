@@ -19,6 +19,7 @@ namespace Longman\TelegramBot\Entities;
  * @method int            getRemainingCount()            Optional. The number of remaining gifts of this type that can be sent by all users; for limited gifts only
  * @method int            getPersonalTotalCount()        Optional. The total number of gifts of this type that can be sent by the bot; for limited gifts only
  * @method int            getPersonalRemainingCount()    Optional. The number of remaining gifts of this type that can be sent by the bot; for limited gifts only
+ * @method string         getRarity()                    Optional. The rarity of the gift
  * @method GiftBackground getBackground()                Optional. Background of the gift
  * @method int            getUniqueGiftVariantCount()    Optional. The total number of different unique gifts that can be obtained by upgrading the gift
  * @method Chat           getPublisherChat()             Optional. Information about the chat that published the gift

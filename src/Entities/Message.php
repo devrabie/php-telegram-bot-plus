@@ -43,7 +43,7 @@ use Longman\TelegramBot\Entities\Topics\GeneralForumTopicUnhidden;
  * @method User                                   getFrom()                                   Optional. Sender, can be empty for messages sent to channels
  * @method Chat                                   getSenderChat()                             Optional. Sender of the message, sent on behalf of a chat. The channel itself for channel messages. The supergroup itself for messages from anonymous group administrators. The linked channel for messages automatically forwarded to the discussion group
  * @method int                                    getSenderBoostCount()                       Optional. If the sender of the message boosted the chat, the number of boosts added by the user
- * @method string                                 getSenderTag()                              Optional. The bot-specified tag for the message sender; for supergroups only
+ * @method string                                 getSenderTag()                              Optional. Tag or custom title of the sender of the message; for supergroups only
  * @method int                                    getDate()                                   Date the message was sent in Unix time
  * @method Chat                                   getChat()                                   Conversation the message belongs to
  * @method MessageOrigin                          getForwardOrigin()                          Optional. Information about the original message for forwarded messages
@@ -144,6 +144,7 @@ use Longman\TelegramBot\Entities\Topics\GeneralForumTopicUnhidden;
  * @method SuggestedPostPaid                      getSuggestedPostPaid()                      Optional. Service message: payment for a suggested post was received
  * @method SuggestedPostRefunded                  getSuggestedPostRefunded()                  Optional. Service message: payment for a suggested post was refunded
  * @method int                                    getPaidStarCount()                          Optional. The number of Telegram Stars that were paid by the sender of the message to send it
+ * @method Audio                                  getFirstProfileAudio()                      Optional. For private chats, the first audio added to the profile of the user
  *
  * @method $this                                  setPaidMedia(PaidMediaInfo $paidMedia)        Optional. Message is a paid media purchase, information about the paid media
  * @method $this                                  setTransaction(StarTransaction $transaction)  Optional. Message is a service message about a successful payment, information about the payment.
@@ -234,6 +235,7 @@ class Message extends Entity implements MaybeInaccessibleMessage
             'suggested_post_refunded'           => SuggestedPostRefunded::class,
             'chat_owner_left'                   => ChatOwnerLeft::class,
             'chat_owner_changed'                => ChatOwnerChanged::class,
+            'first_profile_audio'               => Audio::class,
         ];
     }
 
