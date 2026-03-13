@@ -6,9 +6,24 @@ Exclamation symbols (:exclamation:) note something of importance e.g. breaking c
 ## [Unreleased]
 ### Notes
 - [:ledger: View file changes][Unreleased]
+
+## [1.2.0] - 2026-03-01
+### Notes
+- [:ledger: View file changes][1.2.0]
+- [API 9.4 and 9.5 Features Documentation](API_9.4_9.5_FEATURES.md)
 - [API 9.3 Features Documentation](API_9.3_FEATURES.md)
-- Support for Telegram Bot API 7.4 through 9.3.
+- Support for Telegram Bot API 7.4 through 9.5.
 ### Added
+- **Bot API 9.5:**
+    - New `MessageEntity` type `date_time` with `unix_time` and `date_time_format`.
+    - Support for `sendMessageDraft` for all bots.
+    - Member tags support in `ChatMemberMember`, `ChatMemberRestricted`, and `setChatMemberTag`.
+    - New permissions `can_edit_tag` and `can_manage_tags`.
+- **Bot API 9.4:**
+    - Topics in private chats via `createForumTopic`.
+    - Colored and custom emoji buttons (`KeyboardButton` and `InlineKeyboardButton`).
+    - Bot profile photo management (`setMyProfilePhoto`, `removeMyProfilePhoto`).
+    - Enhanced video and audio metadata (`VideoQuality`, `UserProfileAudios`, `first_profile_audio`).
 - **Private Chat Topics:** Support for forum topics in private chats.
 - **Message Streaming:** Added `sendMessageDraft` for streaming partial messages.
 - **Gifts Enhancement:** Added `getUserGifts`, `getChatGifts`, and support for Unique Gifts with colors and blockchain info.
@@ -756,7 +771,8 @@ Exclamation symbols (:exclamation:) note something of importance e.g. breaking c
 [PSR-3]: https://www.php-fig.org/psr/psr-3
 [Tidelift]: https://tidelift.com/subscription/pkg/packagist-longman-telegram-bot?utm_source=packagist-longman-telegram-bot&utm_medium=referral&utm_campaign=changelog
 
-[Unreleased]: https://github.com/php-telegram-bot/core/compare/1.0.3...develop
+[Unreleased]: https://github.com/php-telegram-bot/core/compare/1.2.0...develop
+[1.2.0]: https://github.com/php-telegram-bot/core/compare/1.0.3...1.2.0
 [1.0.3]: https://github.com/php-telegram-bot/core/compare/1.0.2...1.0.3
 [1.0.2]: https://github.com/php-telegram-bot/core/compare/0.83.0...1.0.2
 [0.83.0]: https://github.com/php-telegram-bot/core/compare/0.82.0...0.83.0

@@ -43,7 +43,7 @@ use Longman\TelegramBot\Entities\Topics\GeneralForumTopicUnhidden;
  * @method User                                   getFrom()                                   Optional. Sender, can be empty for messages sent to channels
  * @method Chat                                   getSenderChat()                             Optional. Sender of the message, sent on behalf of a chat. The channel itself for channel messages. The supergroup itself for messages from anonymous group administrators. The linked channel for messages automatically forwarded to the discussion group
  * @method int                                    getSenderBoostCount()                       Optional. If the sender of the message boosted the chat, the number of boosts added by the user
- * @method string                                 getSenderTag()                              Optional. The bot-specified tag for the message sender; for supergroups only
+ * @method string                                 getSenderTag()                              Optional. Tag or custom title of the sender of the message; for supergroups only
  * @method int                                    getDate()                                   Date the message was sent in Unix time
  * @method Chat                                   getChat()                                   Conversation the message belongs to
  * @method MessageOrigin                          getForwardOrigin()                          Optional. Information about the original message for forwarded messages
@@ -131,9 +131,8 @@ use Longman\TelegramBot\Entities\Topics\GeneralForumTopicUnhidden;
  * @method ChatOwnerLeft                          getChatOwnerLeft()                          Optional. Service message: the chat owner left the chat
  * @method ChatOwnerChanged                       getChatOwnerChanged()                       Optional. Service message: the chat owner was changed
  * @method bool                                   getIsPaidPost()                             Optional. True, if the message is a paid post
- *
- * @method PaidMediaInfo                          getPaidMedia()                              Optional. Message is a paid media purchase, information about the paid media
- * @method StarTransaction                        getTransaction()                            Optional. Message is a service message about a successful payment, information about the payment.
+ * @method PaidMediaInfo                          getPaidMedia()                              Optional. Message contains paid media; information about the paid media
+ * @method StarTransaction                        getTransaction()                            Optional. Message is a service message about a successful payment for Telegram Stars, information about the transaction.
  * @method WebAppInfo                             getWebApp()                                 Optional. Service message: a Web App was launched for the user
  * @method GiftInfo                               getGift()                                   Optional. Service message: a regular gift was sent or received
  * @method UniqueGiftInfo                         getUniqueGift()                             Optional. Service message: a unique gift was sent or received
@@ -144,10 +143,6 @@ use Longman\TelegramBot\Entities\Topics\GeneralForumTopicUnhidden;
  * @method SuggestedPostPaid                      getSuggestedPostPaid()                      Optional. Service message: payment for a suggested post was received
  * @method SuggestedPostRefunded                  getSuggestedPostRefunded()                  Optional. Service message: payment for a suggested post was refunded
  * @method int                                    getPaidStarCount()                          Optional. The number of Telegram Stars that were paid by the sender of the message to send it
- *
- * @method $this                                  setPaidMedia(PaidMediaInfo $paidMedia)        Optional. Message is a paid media purchase, information about the paid media
- * @method $this                                  setTransaction(StarTransaction $transaction)  Optional. Message is a service message about a successful payment, information about the payment.
- * @method $this                                  setWebApp(WebAppInfo $webApp)                 Optional. Service message: a Web App was launched for the user
  */
 class Message extends Entity implements MaybeInaccessibleMessage
 {

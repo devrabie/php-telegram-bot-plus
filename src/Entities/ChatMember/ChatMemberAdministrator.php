@@ -31,6 +31,7 @@ use Longman\TelegramBot\Entities\User;
  * @method bool   getCanManageDirectMessages() Optional. True, if the administrator can manage direct messages of the channel and decline suggested posts; for channels only
  * @method bool   getCanManageTags()       Optional. True, if the administrator can manage chat member tags; for groups and supergroups only
  * @method string getCustomTitle()         Custom title for this user
+ * @method string getTag()                 Optional. Tag of the member
  */
 class ChatMemberAdministrator extends Entity implements ChatMember
 {

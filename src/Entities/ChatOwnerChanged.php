@@ -9,6 +9,7 @@ namespace Longman\TelegramBot\Entities;
  *
  * @link https://core.telegram.org/bots/api#chatownerchanged
  *
+ * @method Chat getChat()     Chat that the owner change happened in
  * @method User getNewOwner() New owner of the chat
  */
 class ChatOwnerChanged extends Entity
@@ -19,6 +20,7 @@ class ChatOwnerChanged extends Entity
     protected function subEntities(): array
     {
         return [
+            'chat'      => Chat::class,
             'new_owner' => User::class,
         ];
     }

@@ -17,8 +17,8 @@ namespace Longman\TelegramBot\Entities;
  * @method UniqueGiftSymbol   getSymbol()            Symbol of the gift
  * @method UniqueGiftBackdrop getBackdrop()          Backdrop of the gift
  * @method bool               getIsPremium()         Optional. True, if the original regular gift was exclusively purchaseable by Telegram Premium subscribers
+ * @method bool               getIsBurned()          Optional. True, if the gift was used to craft another gift and isn't available anymore
  * @method bool               getIsFromBlockchain()  Optional. True, if the gift is assigned from the TON blockchain and can't be resold or transferred in Telegram
- * @method bool               getIsBurned()          Optional. True, if the unique gift was burned and isn't available anymore
  * @method UniqueGiftColors   getColors()            Optional. The color scheme that can be used by the gift's owner for the chat's name, replies to messages and link previews; for business account gifts and gifts that are currently on sale only
  * @method Chat               getPublisherChat()     Optional. Information about the chat that published the gift
  */
