@@ -187,6 +187,7 @@ use Throwable;
  * @method static ServerResponse editUserStarSubscription(array $data)        Use this method to cancel or restore the self-renewal of a Telegram Star subscription for a user. Returns True on success.
  * @method static ServerResponse refundStarPayment(array $data)               Use this method to refund a successful payment in Telegram Stars. Returns True on success.
  * @method static ServerResponse savePreparedInlineMessage(array $data)       Use this method to save a message that can be sent by a user from a Mini App via the method shareMessage. Returns a PreparedInlineMessage object.
+ * @method static ServerResponse setChatBottomButton(array $data)             Use this method to set a bottom button for a chat. Returns True on success.
  */
 class Request
 {
@@ -421,6 +422,7 @@ class Request
         'editUserStarSubscription',
         'refundStarPayment',
         'savePreparedInlineMessage',
+        'setChatBottomButton',
     ];
 
     /**

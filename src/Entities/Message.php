@@ -131,9 +131,8 @@ use Longman\TelegramBot\Entities\Topics\GeneralForumTopicUnhidden;
  * @method ChatOwnerLeft                          getChatOwnerLeft()                          Optional. Service message: the chat owner left the chat
  * @method ChatOwnerChanged                       getChatOwnerChanged()                       Optional. Service message: the chat owner was changed
  * @method bool                                   getIsPaidPost()                             Optional. True, if the message is a paid post
- *
- * @method PaidMediaInfo                          getPaidMedia()                              Optional. Message is a paid media purchase, information about the paid media
- * @method StarTransaction                        getTransaction()                            Optional. Message is a service message about a successful payment, information about the payment.
+ * @method PaidMediaInfo                          getPaidMedia()                              Optional. Message contains paid media; information about the paid media
+ * @method StarTransaction                        getTransaction()                            Optional. Message is a service message about a successful payment for Telegram Stars, information about the transaction.
  * @method WebAppInfo                             getWebApp()                                 Optional. Service message: a Web App was launched for the user
  * @method GiftInfo                               getGift()                                   Optional. Service message: a regular gift was sent or received
  * @method UniqueGiftInfo                         getUniqueGift()                             Optional. Service message: a unique gift was sent or received
@@ -144,11 +143,6 @@ use Longman\TelegramBot\Entities\Topics\GeneralForumTopicUnhidden;
  * @method SuggestedPostPaid                      getSuggestedPostPaid()                      Optional. Service message: payment for a suggested post was received
  * @method SuggestedPostRefunded                  getSuggestedPostRefunded()                  Optional. Service message: payment for a suggested post was refunded
  * @method int                                    getPaidStarCount()                          Optional. The number of Telegram Stars that were paid by the sender of the message to send it
- * @method Audio                                  getFirstProfileAudio()                      Optional. For private chats, the first audio added to the profile of the user
- *
- * @method $this                                  setPaidMedia(PaidMediaInfo $paidMedia)        Optional. Message is a paid media purchase, information about the paid media
- * @method $this                                  setTransaction(StarTransaction $transaction)  Optional. Message is a service message about a successful payment, information about the payment.
- * @method $this                                  setWebApp(WebAppInfo $webApp)                 Optional. Service message: a Web App was launched for the user
  */
 class Message extends Entity implements MaybeInaccessibleMessage
 {
@@ -235,7 +229,6 @@ class Message extends Entity implements MaybeInaccessibleMessage
             'suggested_post_refunded'           => SuggestedPostRefunded::class,
             'chat_owner_left'                   => ChatOwnerLeft::class,
             'chat_owner_changed'                => ChatOwnerChanged::class,
-            'first_profile_audio'               => Audio::class,
         ];
     }
 

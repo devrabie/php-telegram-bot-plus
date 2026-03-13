@@ -115,6 +115,19 @@ $chat_info = Request::getChat(['chat_id' => $user_id])->getResult();
 $first_audio = $chat_info->getFirstProfileAudio();
 ```
 
-### 5. ميزات الهدايا (Gifts)
+### 5. زر الدردشة السفلي (Chat Bottom Button)
+تم إضافة دعم لتعيين زر في أسفل الدردشة يفتح تطبيق ويب (Mini App).
+
+```php
+Request::setChatBottomButton([
+    'chat_id' => $chat_id,
+    'bottom_button' => [
+        'text' => 'فتح المتجر',
+        'web_app' => ['url' => 'https://example.com/shop'],
+    ],
+]);
+```
+
+### 6. ميزات الهدايا (Gifts)
 - إضافة حقل `rarity` لنماذج الهدايا الفريدة (`UniqueGiftModel`).
 - إضافة حقل `is_burned` للهدايا الفريدة (`UniqueGift`) التي تم استخدامها في نظام الصياغة (Crafting).
