@@ -29,7 +29,7 @@ use Longman\TelegramBot\Entities\Games\CallbackGame;
  * @method CallbackGame   getCallbackGame()                 Optional. Description of the game that will be launched when the user presses the button.
  * @method bool           getPay()                          Optional. Specify True, to send a Pay button.
  * @method CopyTextButton getCopyText()                     Optional. Description of the button that copies the specified text to the clipboard.
- * @method string         getStyle()                        Optional. Style of the button. Currently, only “primary” and “secondary” are supported.
+ * @method string         getStyle()                        Optional. Style of the button. Must be one of “danger” (red), “success” (green) or “primary” (blue). If omitted, then an app-specific style is used.
  * @method string         getIconCustomEmojiId()            Optional. Unique identifier of the custom emoji shown as the button icon.
  *
  * @method $this setText(string $text)                                                     Label text on the button
@@ -43,7 +43,7 @@ use Longman\TelegramBot\Entities\Games\CallbackGame;
  * @method $this setCallbackGame(CallbackGame $callback_game)                              Optional. Description of the game that will be launched when the user presses the button.
  * @method $this setPay(bool $pay)                                                         Optional. Specify True, to send a Pay button.
  * @method $this setCopyText(CopyTextButton $copy_text)                                    Optional. Description of the button that copies the specified text to the clipboard.
- * @method $this setStyle(string $style)                                                   Optional. Style of the button. Currently, only “primary” and “secondary” are supported.
+ * @method $this setStyle(string $style)                                                   Optional. Style of the button. Must be one of “danger” (red), “success” (green) or “primary” (blue). If omitted, then an app-specific style is used.
  * @method $this setIconCustomEmojiId(string $icon_custom_emoji_id)                        Optional. Unique identifier of the custom emoji shown as the button icon.
  */
 class InlineKeyboardButton extends KeyboardButton
