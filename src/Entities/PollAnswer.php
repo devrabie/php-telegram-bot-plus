@@ -22,6 +22,7 @@ namespace Longman\TelegramBot\Entities;
  * @method Chat   getVoterChat() Optional. The chat that changed the answer to the poll, if the voter is anonymous
  * @method User   getUser()      Optional. The user, who changed the answer to the poll
  * @method array  getOptionIds() 0-based identifiers of answer options, chosen by the user. May be empty if the user retracted their vote.
+ * @method array  getOptionPersistentIds() Optional. Unique identifiers of answer options, chosen by the user
  */
 class PollAnswer extends Entity
 {

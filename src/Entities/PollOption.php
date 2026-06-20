@@ -21,6 +21,11 @@ namespace Longman\TelegramBot\Entities;
  * @method string          getText()          Option text, 1-100 characters
  * @method int             getVoterCount()    Number of users that voted for this option
  * @method MessageEntity[] getTextEntities()  Optional. Special entities that appear in the option text. Currently, only custom emoji entities are allowed in poll option texts
+ * @method string          getPersistentId()  Optional. Unique identifier of the poll option
+ * @method User            getAddedByUser()   Optional. User that added the option
+ * @method Chat            getAddedByChat()   Optional. Chat that added the option
+ * @method int             getAdditionDate()  Optional. Date when the option was added in Unix time
+ * @method PollMedia       getMedia()         Optional. Media associated with the option
  */
 class PollOption extends Entity
 {
@@ -31,6 +36,9 @@ class PollOption extends Entity
     {
         return [
             'text_entities' => [MessageEntity::class],
+            'added_by_user' => User::class,
+            'added_by_chat' => Chat::class,
+            'media'         => PollMedia::class,
         ];
     }
 }

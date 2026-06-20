@@ -17,7 +17,8 @@ class TransactionPartnerFactory extends Factory
         ];
 
         if (!isset($type[$data['type'] ?? ''])) {
-            return new class($data, $bot_username) extends Entity implements TransactionPartner {};
+            return new class ($data, $bot_username) extends Entity implements TransactionPartner {
+            };
         }
 
         $class = $type[$data['type']];
