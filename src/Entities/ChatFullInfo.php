@@ -26,6 +26,7 @@ namespace Longman\TelegramBot\Entities;
  * @method int             getUnrestrictBoostCount()               Optional. For supergroups, the minimum number of boosts that a non-administrator user needs to add in order to ignore slow mode and chat permissions.
  * @method int             getMessageAutoDeleteTime()              Optional. The time after which all messages sent to the chat will be automatically deleted; in seconds. Returned only in getChat.
  * @method bool            getHasAggressiveAntiSpamEnabled()       Optional. True, if aggressive anti-spam checks are enabled in the supergroup. The field is only available to chat administrators.
+ * @method User            getGuardBot()                           Optional. The bot that is serving as the guard bot for the chat. Returned only in getChat.
  * @method bool            getHasHiddenMembers()                   Optional. True, if non-administrators can only get the list of bots and administrators in the chat. Returned only in getChat.
  * @method bool            getHasProtectedContent()                Optional. True, if messages from the chat can't be forwarded to other chats. Returned only in getChat.
  * @method bool            getHasVisibleHistory()                  Optional. True, if new chat members will have access to old messages; available only to chat administrators.
@@ -55,6 +56,7 @@ class ChatFullInfo extends Chat
             'rating'              => UserRating::class,
             'unique_gift_colors'  => UniqueGiftColors::class,
             'accepted_gift_types' => AcceptedGiftTypes::class,
+            'guard_bot'           => User::class,
             'first_profile_audio' => Audio::class,
         ]);
     }

@@ -10,10 +10,19 @@ Exclamation symbols (:exclamation:) note something of importance e.g. breaking c
 ## [1.2.0] - 2026-03-01
 ### Notes
 - [:ledger: View file changes][1.2.0]
+- [API 10.1 Features Documentation](API_10.1_FEATURES.md)
 - [API 9.4 and 9.5 Features Documentation](API_9.4_9.5_FEATURES.md)
 - [API 9.3 Features Documentation](API_9.3_FEATURES.md)
-- Support for Telegram Bot API 7.4 through 9.5.
+- Support for Telegram Bot API 7.4 through 10.1.
 ### Added
+- **Bot API 10.1:**
+    - Support for Rich Messages via `RichMessage`, `RichText`, and `RichBlock`.
+    - Added methods `sendRichMessage` and `sendRichMessageDraft`.
+    - Support for `rich_message` in `editMessageText`.
+    - Added support for Join Request Queries: `answerChatJoinRequestQuery` and `sendChatJoinRequestWebApp`.
+    - Added `supports_join_request_queries` to `User`.
+    - Added `guard_bot` to `ChatFullInfo`.
+    - Added `Link` and `InputMediaLink` for polls.
 - **Bot API 9.5:**
     - New `MessageEntity` type `date_time` with `unix_time` and `date_time_format`.
     - Support for `sendMessageDraft` for all bots.
