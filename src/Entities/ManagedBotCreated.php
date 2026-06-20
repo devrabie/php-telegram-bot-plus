@@ -12,16 +12,15 @@
 namespace Longman\TelegramBot\Entities;
 
 /**
- * Class ChatOwnerLeft
+ * Class ManagedBotCreated
  *
- * This object represents a service message about the chat owner leaving the chat.
+ * This object contains information about the bot that was created to be managed by the current bot.
  *
- * @link https://core.telegram.org/bots/api#chatownerleft
+ * @link https://core.telegram.org/bots/api#managedbotcreated
  *
- * @method User getOldOwner() User that left the chat
- * @method Chat getChat()     Chat
+ * @method User getBot() Information about the bot.
  */
-class ChatOwnerLeft extends Entity
+class ManagedBotCreated extends Entity
 {
     /**
      * {@inheritdoc}
@@ -29,8 +28,7 @@ class ChatOwnerLeft extends Entity
     protected function subEntities(): array
     {
         return [
-            'old_owner' => User::class,
-            'chat'      => Chat::class,
+            'bot' => User::class,
         ];
     }
 }

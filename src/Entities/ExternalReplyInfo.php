@@ -39,6 +39,7 @@ use Longman\TelegramBot\Entities\MessageOrigin\Factory as MessageOriginFactory;
  * @method Giveaway           getGiveaway()           Optional. Message is a scheduled giveaway, information about the giveaway
  * @method GiveawayWinners    getGiveawayWinners()    Optional. A giveaway with public winners was completed
  * @method Invoice            getInvoice()            Optional. Message is an invoice for a payment, information about the invoice. More about payments »
+ * @method LivePhoto          getLivePhoto()          Optional. Message is a live photo, information about the live photo
  * @method Location           getLocation()           Optional. Message is a shared location, information about the location
  * @method Poll               getPoll()               Optional. Message is a native poll, information about the poll
  * @method Venue              getVenue()              Optional. Message is a venue, information about the venue
@@ -71,6 +72,7 @@ class ExternalReplyInfo extends Entity
             'giveaway'             => Giveaway::class,
             'giveaway_winners'     => GiveawayWinners::class,
             'invoice'              => Invoice::class,
+            'live_photo'           => LivePhoto::class,
             'location'             => Location::class,
             'poll'                 => Poll::class,
             'venue'                => Venue::class,

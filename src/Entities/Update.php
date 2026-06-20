@@ -44,6 +44,7 @@ use Longman\TelegramBot\Entities\Payments\ShippingQuery;
  * @method BusinessMessagesDeleted     getDeletedBusinessMessages() Optional. Messages were deleted from a connected business account
  * @method StarTransaction             getTransaction()            Optional. New incoming transaction; for bots only
  * @method PaidMediaPurchased          getPurchasedPaidMedia()     Optional. A user purchased paid media with a payload for the bot
+ * @method Message                     getGuestMessage()         Optional. A message in guest mode was sent
  */
 class Update extends Entity
 {
@@ -71,6 +72,8 @@ class Update extends Entity
     public const TYPE_DELETED_BUSINESS_MESSAGES = 'deleted_business_messages';
     public const TYPE_TRANSACTION              = 'transaction';
     public const TYPE_PURCHASED_PAID_MEDIA     = 'purchased_paid_media';
+    public const TYPE_GUEST_MESSAGE            = 'guest_message';
+    public const TYPE_MANAGED_BOT              = 'managed_bot';
 
     /**
      * {@inheritdoc}
@@ -102,6 +105,8 @@ class Update extends Entity
             self::TYPE_DELETED_BUSINESS_MESSAGES => BusinessMessagesDeleted::class,
             self::TYPE_TRANSACTION              => StarTransaction::class,
             self::TYPE_PURCHASED_PAID_MEDIA     => PaidMediaPurchased::class,
+            self::TYPE_GUEST_MESSAGE            => Message::class,
+            self::TYPE_MANAGED_BOT              => ManagedBotUpdated::class,
         ];
     }
 

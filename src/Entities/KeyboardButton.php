@@ -20,6 +20,7 @@ namespace Longman\TelegramBot\Entities;
  *
  * @property KeyboardButtonRequestUsers $request_users
  * @property KeyboardButtonRequestChat  $request_chat
+ * @property KeyboardButtonRequestManagedBot $request_managed_bot
  * @property bool                       $request_contact
  * @property bool                       $request_location
  * @property KeyboardButtonPollType     $request_poll
@@ -38,6 +39,7 @@ namespace Longman\TelegramBot\Entities;
  * @method $this setText(string $text)                                      Text of the button. If none of the optional fields are used, it will be sent to the bot as a message when the button is pressed
  * @method $this setRequestUsers(KeyboardButtonRequestUsers $request_users) Optional. If specified, pressing the button will open a list of suitable users. Identifiers of selected users will be sent to the bot in a “users_shared” service message. Available in private chats only.
  * @method $this setRequestChat(KeyboardButtonRequestChat $request_chat)    Optional. If specified, pressing the button will open a list of suitable chats. Tapping on a chat will send its identifier to the bot in a “chat_shared” service message. Available in private chats only.
+ * @method $this setRequestManagedBot(KeyboardButtonRequestManagedBot $request_managed_bot) Optional. If specified, pressing the button will prompt the user to create and send a managed bot to the given bot.
  * @method $this setRequestContact(bool $request_contact)                   Optional. If True, the user's phone number will be sent as a contact when the button is pressed. Available in private chats only
  * @method $this setRequestLocation(bool $request_location)                 Optional. If True, the user's current location will be sent when the button is pressed. Available in private chats only
  * @method $this setRequestPoll(KeyboardButtonPollType $request_poll)       Optional. If specified, the user will be asked to create a poll and send it to the bot when the button is pressed. Available in private chats only
@@ -63,6 +65,7 @@ class KeyboardButton extends Entity
         return [
             'request_users' => KeyboardButtonRequestUsers::class,
             'request_chat'  => KeyboardButtonRequestChat::class,
+            'request_managed_bot' => KeyboardButtonRequestManagedBot::class,
             'request_poll'  => KeyboardButtonPollType::class,
             'web_app'       => WebAppInfo::class,
         ];
@@ -86,8 +89,8 @@ class KeyboardButton extends Entity
     public function __call($method, $args)
     {
         // Only 1 of these can be set, so clear the others when setting a new one.
-        if (in_array($method, ['setRequestUsers', 'setRequestChat', 'setRequestContact', 'setRequestLocation', 'setRequestPoll', 'setWebApp'], true)) {
-            unset($this->request_users, $this->request_chat, $this->request_contact, $this->request_location, $this->request_poll, $this->web_app);
+        if (in_array($method, ['setRequestUsers', 'setRequestChat', 'setRequestManagedBot', 'setRequestContact', 'setRequestLocation', 'setRequestPoll', 'setWebApp'], true)) {
+            unset($this->request_users, $this->request_chat, $this->request_managed_bot, $this->request_contact, $this->request_location, $this->request_poll, $this->web_app);
         }
 
         return parent::__call($method, $args);

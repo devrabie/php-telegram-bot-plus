@@ -12,16 +12,16 @@
 namespace Longman\TelegramBot\Entities;
 
 /**
- * Class ChatOwnerLeft
+ * Class PaidMediaLivePhoto
  *
- * This object represents a service message about the chat owner leaving the chat.
+ * The paid media is a live photo.
  *
- * @link https://core.telegram.org/bots/api#chatownerleft
+ * @link https://core.telegram.org/bots/api#paidmedialivephoto
  *
- * @method User getOldOwner() User that left the chat
- * @method Chat getChat()     Chat
+ * @method string    getType()      Type of the paid media, always “live_photo”
+ * @method LivePhoto getLivePhoto() The live photo
  */
-class ChatOwnerLeft extends Entity
+class PaidMediaLivePhoto extends Entity
 {
     /**
      * {@inheritdoc}
@@ -29,8 +29,7 @@ class ChatOwnerLeft extends Entity
     protected function subEntities(): array
     {
         return [
-            'old_owner' => User::class,
-            'chat'      => Chat::class,
+            'live_photo' => LivePhoto::class,
         ];
     }
 }

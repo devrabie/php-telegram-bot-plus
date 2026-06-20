@@ -142,6 +142,10 @@ use Longman\TelegramBot\Entities\Topics\GeneralForumTopicUnhidden;
  * @method SuggestedPostDeclined                  getSuggestedPostDeclined()                  Optional. Service message: a suggested post was declined
  * @method SuggestedPostPaid                      getSuggestedPostPaid()                      Optional. Service message: payment for a suggested post was received
  * @method SuggestedPostRefunded                  getSuggestedPostRefunded()                  Optional. Service message: payment for a suggested post was refunded
+ * @method ManagedBotCreated                      getManagedBotCreated()                      Optional. Message is a service message about a created managed bot
+ * @method PollOptionAdded                        getPollOptionAdded()                        Optional. Message is a service message about a poll option added
+ * @method PollOptionDeleted                      getPollOptionDeleted()                      Optional. Message is a service message about a poll option deleted
+ * @method int                                    getReplyToPollOptionId()                    Optional. Identifier of the poll option to which the message is replied
  * @method int                                    getPaidStarCount()                          Optional. The number of Telegram Stars that were paid by the sender of the message to send it
  */
 class Message extends Entity implements MaybeInaccessibleMessage
@@ -179,6 +183,11 @@ class Message extends Entity implements MaybeInaccessibleMessage
             'game'                              => Game::class,
             'poll'                              => Poll::class,
             'venue'                             => Venue::class,
+
+            'guest_bot_caller_user'             => User::class,
+            'guest_bot_caller_chat'             => Chat::class,
+
+            'live_photo'                        => LivePhoto::class,
             'location'                          => Location::class,
             'new_chat_members'                  => [User::class],
             'left_chat_member'                  => User::class,
@@ -227,6 +236,9 @@ class Message extends Entity implements MaybeInaccessibleMessage
             'suggested_post_declined'           => SuggestedPostDeclined::class,
             'suggested_post_paid'               => SuggestedPostPaid::class,
             'suggested_post_refunded'           => SuggestedPostRefunded::class,
+            'managed_bot_created'               => ManagedBotCreated::class,
+            'poll_option_added'                 => PollOptionAdded::class,
+            'poll_option_deleted'               => PollOptionDeleted::class,
             'chat_owner_left'                   => ChatOwnerLeft::class,
             'chat_owner_changed'                => ChatOwnerChanged::class,
         ];

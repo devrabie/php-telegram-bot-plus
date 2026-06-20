@@ -81,7 +81,7 @@ use Throwable;
  * @method static ServerResponse unpinAllChatMessages(array $data)            Use this method to clear the list of pinned messages in a chat. If the chat is not a private chat, the bot must be an administrator in the chat for this to work and must have the 'can_pin_messages' admin right in a supergroup or 'can_edit_messages' admin right in a channel. Returns True on success.
  * @method static ServerResponse leaveChat(array $data)                       Use this method for your bot to leave a group, supergroup or channel. Returns True on success.
  * @method static ServerResponse getChat(array $data)                         Use this method to get up to date information about the chat (current name of the user for one-on-one conversations, current username of a user, group or channel, etc.). Returns a ChatFullInfo object on success.
- * @method static ServerResponse getChatAdministrators(array $data)           Use this method to get a list of administrators in a chat. On success, returns an Array of ChatMember objects that contains information about all chat administrators except other bots. If the chat is a group or a supergroup and no administrators were appointed, only the creator will be returned.
+ * @method static ServerResponse getChatAdministrators(array $data)           Use this method to get a list of administrators in a chat. On success, returns an Array of ChatMember objects that contains information about all chat administrators except other bots. If the chat is a group or a supergroup and no administrators were appointed, only the creator will be returned. Pass return_bots to return bots too.
  * @method static ServerResponse getChatMemberCount(array $data)              Use this method to get the number of members in a chat. Returns Int on success.
  * @method static ServerResponse getChatMember(array $data)                   Use this method to get information about a member of a chat. Returns a ChatMember object on success.
  * @method static ServerResponse setChatStickerSet(array $data)               Use this method to set a new group sticker set for a supergroup. The bot must be an administrator in the chat for this to work and must have the appropriate admin rights. Use the field can_set_sticker_set optionally returned in getChat requests to check if the bot can use this method. Returns True on success.
@@ -177,7 +177,17 @@ use Throwable;
  * @method static ServerResponse setChatMemberTag(array $data)                Use this method to set a tag for a regular member in a group or a supergroup. Returns True on success.
  * @method static ServerResponse setMyProfilePhoto(array $data)               Use this method to set a new profile photo for the bot. Returns True on success.
  * @method static ServerResponse removeMyProfilePhoto(array $data)            Use this method to remove the current profile photo of the bot. Returns True on success.
- * @method static ServerResponse getUserProfileAudios(array $data)            Use this method to get a list of audios added to the profile of a user. Returns a UserProfileAudios object.
+ * @method static ServerResponse getManagedBotToken(array $data)                 Use this method to get a token of a bot managed by the current bot. Returns the bot token as String on success.
+ * @method static ServerResponse replaceManagedBotToken(array $data)             Use this method to change the token of a bot managed by the current bot. Returns the new bot token as String on success.
+ * @method static ServerResponse savePreparedKeyboardButton(array $data)           Use this method to save a keyboard button that can be requested from a Web App. Returns the prepared keyboard button as PreparedKeyboardButton on success.
+ * @method static ServerResponse answerGuestQuery(array $data)                     Use this method to send an answer to a guest query. Returns a SentGuestMessage object on success.
+ * @method static ServerResponse deleteAllMessageReactions(array $data)            Use this method to delete all reactions from a message. Returns True on success.
+ * @method static ServerResponse deleteMessageReaction(array $data)                Use this method to delete a reaction from a message. Returns True on success.
+ * @method static ServerResponse sendLivePhoto(array $data)                        Use this method to send live photos. Returns the sent Message on success.
+ * @method static ServerResponse getManagedBotAccessSettings(array $data)          Use this method to get the current access settings of a bot managed by the current bot. Returns BotAccessSettings on success.
+ * @method static ServerResponse setManagedBotAccessSettings(array $data)          Use this method to change the access settings of a bot managed by the current bot. Returns True on success.
+ * @method static ServerResponse getUserPersonalChatMessages(array $data)          Use this method to get a list of messages from a personal chat with a user. Returns an array of Message on success.
+ * @method static ServerResponse getUserProfileAudios(array $data)                 Use this method to get a list of audios added to the profile of a user. Returns a UserProfileAudios object.
  * @method static ServerResponse verifyUser(array $data)                      Use this method to verify a user on behalf of an organization. Returns True on success.
  * @method static ServerResponse verifyChat(array $data)                      Use this method to verify a chat on behalf of an organization. Returns True on success.
  * @method static ServerResponse removeUserVerification(array $data)          Use this method to remove verification from a user on behalf of an organization. Returns True on success.
@@ -413,6 +423,9 @@ class Request
         'setMyProfilePhoto',
         'removeMyProfilePhoto',
         'getUserProfileAudios',
+        'getManagedBotToken',
+        'replaceManagedBotToken',
+        'savePreparedKeyboardButton',
         'verifyUser',
         'verifyChat',
         'removeUserVerification',
@@ -423,6 +436,13 @@ class Request
         'refundStarPayment',
         'savePreparedInlineMessage',
         'setChatBottomButton',
+        'answerGuestQuery',
+        'deleteAllMessageReactions',
+        'deleteMessageReaction',
+        'sendLivePhoto',
+        'getManagedBotAccessSettings',
+        'setManagedBotAccessSettings',
+        'getUserPersonalChatMessages',
     ];
 
     /**
@@ -469,6 +489,7 @@ class Request
         'sendDocument'        => ['document', 'thumbnail'],
         'sendVideo'           => ['video', 'thumbnail', 'cover'],
         'sendAnimation'       => ['animation', 'thumbnail'],
+        'sendLivePhoto'       => ['live_photo'],
         'sendVoice'           => ['voice'],
         'sendVideoNote'       => ['video_note', 'thumbnail'],
         'setChatPhoto'        => ['photo'],
