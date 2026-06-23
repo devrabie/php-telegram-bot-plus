@@ -30,6 +30,7 @@ namespace Longman\TelegramBot\Entities;
  * @method bool   getCanConnectToBusiness()       Optional. True, if the bot can be connected to a Telegram Business account to receive its messages. Returned only in getMe.
  * @method bool   getHasMainWebApp()              Optional. True, if the bot has a main Web App. Returned only in getMe.
  * @method bool   getHasTopicsEnabled()           Optional. True, if the bot has forum topic mode enabled in private chats. Returned only in getMe.
+ * @method bool   getSupportsJoinRequestQueries() Optional. True, if the bot supports join request queries. Returned only in getMe.
  * @method bool   getSupportsGuestQueries()       Optional. True, if the bot supports guest queries. Returned only in getMe.
  * @method bool   getCanManageBots()              Optional. True, if the user is allowed to create, edit, or delete managed bots. Returned only in getMe.
  * @method bool   getAllowsUsersToCreateTopics() Optional. True, if the bot allows users to create forum topics in private chats. Returned only in getMe.

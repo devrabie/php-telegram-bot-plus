@@ -119,6 +119,7 @@ use Longman\TelegramBot\Entities\Topics\GeneralForumTopicUnhidden;
  * @method VideoChatEnded                         getVideoChatEnded()                         Optional. Service message: voice chat ended
  * @method VideoChatParticipantsInvited           getVideoChatParticipantsInvited()           Optional. Service message: new participants invited to a voice chat
  * @method WebAppData                             getWebAppData()                             Optional. Service message: data sent by a Web App
+ * @method RichMessage                          getRichMessage()                            Optional. Rich formatted message.
  * @method InlineKeyboard                         getReplyMarkup()                            Optional. Inline keyboard attached to the message. login_url buttons are represented as ordinary url buttons.
  * @method string                                 getBusinessConnectionId()                   Optional. Unique identifier of the business connection from which the message was received. If non-empty, the message is business_message.
  * @method User                                   getSenderBusinessBot()                      Optional. The bot that actually sent the message on behalf of the business account. Available only for outgoing messages sent on behalf of the business account.
@@ -217,6 +218,7 @@ class Message extends Entity implements MaybeInaccessibleMessage
             'video_chat_ended'                  => VideoChatEnded::class,
             'video_chat_participants_invited'   => VideoChatParticipantsInvited::class,
             'web_app_data'                      => WebAppData::class,
+            'rich_message'                      => RichMessage::class,
             'reply_markup'                      => InlineKeyboard::class,
             'chat_background_set'               => ChatBackground::class,
             'checklist'                         => Checklist::class,
