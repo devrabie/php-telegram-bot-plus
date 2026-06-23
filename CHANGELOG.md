@@ -19,6 +19,7 @@ Exclamation symbols (:exclamation:) note something of importance e.g. breaking c
     - Support for Rich Messages via `RichMessage`, `RichText`, and `RichBlock`.
     - Added methods `sendRichMessage` and `sendRichMessageDraft`.
     - Support for `rich_message` in `editMessageText`.
+    - Added instructions for HTML formatting in Rich Messages (tags like `<mark>`, `<sub>`, `<sup>`).
     - Added support for Join Request Queries: `answerChatJoinRequestQuery` and `sendChatJoinRequestWebApp`.
     - Added `supports_join_request_queries` to `User`.
     - Added `guard_bot` to `ChatFullInfo`.

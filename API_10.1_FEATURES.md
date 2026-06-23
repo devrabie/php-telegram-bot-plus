@@ -64,3 +64,45 @@ Request::sendPoll([
 ```
 
 تم تحديث المكتبة بالكامل لدعم هذه الكيانات والأساليب بطريقة سهلة ومدمجة.
+
+## 4. تنسيق الرسائل عبر HTML في الرسائل الغنية (HTML Formatting)
+تسمح تيليجرام أيضاً بتنسيق الرسائل الغنية باستخدام `HTML` دون الحاجة لتعريف هيكل `RichBlock` بالكامل عبر المصفوفات المعقدة. تم إضافة علامات (Tags) جديدة لدعم الرسائل الغنية.
+
+**التنسيقات الجديدة المدعومة:**
+- `<mark>` أو `<mark class="marked">`: لتمييز النص (Marked).
+- `<sub>`: للنصوص السفلية (Subscript).
+- `<sup>`: للنصوص العلوية (Superscript).
+- `<details>` و `<summary>`: لإضافة كتل التفاصيل القابلة للطي (Details Block).
+- `<blockquote>` مع دعم `expandable`: للاقتباسات القابلة للتوسيع.
+
+**كيفية كتابتها (مثال):**
+```php
+use Longman\TelegramBot\Request;
+
+$htmlText = '
+<b>نص عريض</b>
+<mark>نص مميز</mark>
+H<sub>2</sub>O و E=mc<sup>2</sup>
+<details>
+  <summary>اضغط لمعرفة المزيد</summary>
+  هذا النص سيكون مخفياً حتى يقوم المستخدم بتوسيعه.
+</details>
+';
+
+$response = Request::sendRichMessage([
+    'chat_id'      => $chat_id,
+    'rich_message' => [
+        'type'   => 'rich_message',
+        'blocks' => [
+            [
+                'type' => 'rich_block_paragraph',
+                'text' => [
+                    'type' => 'rich_text_marked',
+                    'text' => 'يمكنك استخدام المصفوفات، أو تمرير HTML مباشرة حسب الطريقة التي تفضلها في دوال الإرسال التي تدعم parse_mode.'
+                ]
+            ]
+        ]
+    ]
+]);
+```
+*ملاحظة: يمكنك إرسال الرسائل بتنسيق `HTML` العادي باستخدام `sendMessage` مع تحديد `parse_mode => 'HTML'` إذا لم ترغب في استخدام كائن `rich_message` بالكامل، وستقوم تيليجرام بتفسير العلامات الجديدة.*
