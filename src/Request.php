@@ -115,7 +115,7 @@ use Throwable;
  * @method static ServerResponse getChatMenuButton(array $data)               Use this method to get the current value of the bot's menu button in a private chat, or the default menu button. Returns MenuButton on success.
  * @method static ServerResponse setMyDefaultAdministratorRights(array $data) Use this method to change the default administrator rights requested by the bot when it's added as an administrator to groups or channels. These rights will be suggested to users, but they are are free to modify the list before adding the bot. Returns True on success.
  * @method static ServerResponse getMyDefaultAdministratorRights(array $data) Use this method to get the current default administrator rights of the bot. Returns ChatAdministratorRights on success.
- * @method static ServerResponse editMessageText(array $data)                 Use this method to edit text and game messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned.
+ * @method static ServerResponse editMessageText(array $data)                 Use this method to edit text and game messages. On success, if the edited message is not an inline message, the edited Message is returned, otherwise True is returned. (accepts `rich_message` via data array)
  * @method static ServerResponse editMessageCaption(array $data)              Use this method to edit captions of messages sent by the bot or via the bot (for inline bots). On success, if edited message is sent by the bot, the edited Message is returned, otherwise True is returned.
  * @method static ServerResponse editMessageMedia(array $data)                Use this method to edit audio, document, photo, or video messages. On success, if the edited message was sent by the bot, the edited Message is returned, otherwise True is returned.
  * @method static ServerResponse editMessageReplyMarkup(array $data)          Use this method to edit only the reply markup of messages sent by the bot or via the bot (for inline bots). On success, if edited message is sent by the bot, the edited Message is returned, otherwise True is returned.
@@ -169,6 +169,10 @@ use Throwable;
  * @method static ServerResponse editMessageChecklist(array $data)            Use this method to edit a checklist on behalf of a connected business account. On success, the edited Message is returned.
  * @method static ServerResponse giftPremiumSubscription(array $data)         Gifts a Telegram Premium subscription to the given user. Returns True on success.
  * @method static ServerResponse sendMessageDraft(array $data)                Stream a partial message to a user while the message is being generated. Returns True on success.
+ * @method static ServerResponse sendRichMessage(array $data)                 Use this method to send rich messages.
+ * @method static ServerResponse sendRichMessageDraft(array $data)            Use this method to stream partial rich messages.
+ * @method static ServerResponse answerChatJoinRequestQuery(array $data)      Use this method to answer chat join request queries.
+ * @method static ServerResponse sendChatJoinRequestWebApp(array $data)       Use this method to send chat join request via web app.
  * @method static ServerResponse getUserGifts(array $data)                    Returns the gifts owned and hosted by a user. Returns OwnedGifts on success.
  * @method static ServerResponse getChatGifts(array $data)                    Returns the gifts owned by a chat. Returns OwnedGifts on success.
  * @method static ServerResponse repostStory(array $data)                     Reposts a story on behalf of a business account from another business account. Both business accounts must be managed by the same bot, and the story on the source account must have been posted (or reposted) by the bot. Requires the can_manage_stories business bot right for both business accounts. Returns Story on success.
@@ -437,6 +441,10 @@ class Request
         'savePreparedInlineMessage',
         'setChatBottomButton',
         'answerGuestQuery',
+        'sendRichMessage',
+        'sendRichMessageDraft',
+        'answerChatJoinRequestQuery',
+        'sendChatJoinRequestWebApp',
         'deleteAllMessageReactions',
         'deleteMessageReaction',
         'sendLivePhoto',

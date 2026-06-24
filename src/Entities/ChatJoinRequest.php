@@ -13,6 +13,7 @@ namespace Longman\TelegramBot\Entities;
  * @method User           getFrom()       User that sent the join request
  * @method int            getUserChatId() Identifier of a private chat with the user who sent the join request.
  * @method int            getDate()       Date the request was sent in Unix time
+ * @method string         getQueryId()    Optional. Unique identifier for the join request query.
  * @method string         getBio()        Optional. Bio of the user.
  * @method ChatInviteLink getInviteLink() Optional. Chat invite link that was used by the user to send the join request
  */
