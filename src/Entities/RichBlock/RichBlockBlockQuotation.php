@@ -9,4 +9,15 @@ namespace Longman\TelegramBot\Entities\RichBlock;
  */
 class RichBlockBlockQuotation extends RichBlock
 {
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function subEntities(): array
+    {
+        return [
+            'credit' => \Longman\TelegramBot\Entities\RichText\RichText::class,
+            'blocks' => [RichBlock::class],
+        ];
+    }
 }

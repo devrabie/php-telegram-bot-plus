@@ -9,4 +9,14 @@ namespace Longman\TelegramBot\Entities\RichBlock;
  */
 class RichBlockListItem extends RichBlock
 {
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function subEntities(): array
+    {
+        return [
+            'blocks' => [RichBlock::class],
+        ];
+    }
 }

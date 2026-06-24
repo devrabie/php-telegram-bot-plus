@@ -9,4 +9,15 @@ namespace Longman\TelegramBot\Entities\RichBlock;
  */
 class RichBlockAnimation extends RichBlock
 {
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function subEntities(): array
+    {
+        return [
+            'caption' => RichBlockCaption::class,
+            'animation' => \Longman\TelegramBot\Entities\Animation::class,
+        ];
+    }
 }

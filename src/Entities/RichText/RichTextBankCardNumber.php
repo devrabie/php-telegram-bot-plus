@@ -9,4 +9,14 @@ namespace Longman\TelegramBot\Entities\RichText;
  */
 class RichTextBankCardNumber extends RichText
 {
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function subEntities(): array
+    {
+        return [
+            'text' => RichText::class,
+        ];
+    }
 }

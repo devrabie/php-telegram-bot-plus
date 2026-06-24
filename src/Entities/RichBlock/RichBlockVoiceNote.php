@@ -9,4 +9,15 @@ namespace Longman\TelegramBot\Entities\RichBlock;
  */
 class RichBlockVoiceNote extends RichBlock
 {
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function subEntities(): array
+    {
+        return [
+            'caption' => RichBlockCaption::class,
+            'voice_note' => \Longman\TelegramBot\Entities\Voice::class,
+        ];
+    }
 }
