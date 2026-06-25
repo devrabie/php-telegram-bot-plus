@@ -9,4 +9,15 @@ namespace Longman\TelegramBot\Entities\RichBlock;
  */
 class RichBlockMap extends RichBlock
 {
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function subEntities(): array
+    {
+        return [
+            'caption' => RichBlockCaption::class,
+            'location' => \Longman\TelegramBot\Entities\Location::class,
+        ];
+    }
 }

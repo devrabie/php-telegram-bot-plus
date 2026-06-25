@@ -9,4 +9,15 @@ namespace Longman\TelegramBot\Entities\RichText;
  */
 class RichTextTextMention extends RichText
 {
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function subEntities(): array
+    {
+        return [
+            'text' => RichText::class,
+            'user' => \Longman\TelegramBot\Entities\User::class,
+        ];
+    }
 }
