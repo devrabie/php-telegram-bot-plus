@@ -422,15 +422,12 @@ class Telegram
     /**
      * Handle getUpdates method
      *
-     * @todo Remove backwards compatibility for old signature and force $data to be an array.
-     *
-     * @param array|int|null $data
-     * @param int|null       $timeout
+     * @param array $data
      *
      * @return ServerResponse
      * @throws TelegramException
      */
-    public function handleGetUpdates($data = null, ?int $timeout = null): ServerResponse
+    public function handleGetUpdates(array $data = []): ServerResponse
     {
         if (empty($this->bot_username)) {
             throw new TelegramException('Bot Username is not defined!');
@@ -440,24 +437,15 @@ class Telegram
 
         $offset = 0;
         $limit  = null;
+        $timeout = null;
 
         // By default, get update types sent by Telegram.
         $allowed_updates = [];
 
-        // @todo Backwards compatibility for old signature, remove in next version.
-        if (!is_array($data)) {
-            $limit = $data;
-
-            @trigger_error(
-                sprintf('Use of $limit and $timeout parameters in %s is deprecated. Use $data array instead.', __METHOD__),
-                E_USER_DEPRECATED
-            );
-        } else {
-            $offset          = $data['offset'] ?? $offset;
-            $limit           = $data['limit'] ?? $limit;
-            $timeout         = $data['timeout'] ?? $timeout;
-            $allowed_updates = $data['allowed_updates'] ?? $allowed_updates;
-        }
+        $offset          = $data['offset'] ?? $offset;
+        $limit           = $data['limit'] ?? $limit;
+        $timeout         = $data['timeout'] ?? $timeout;
+        $allowed_updates = $data['allowed_updates'] ?? $allowed_updates;
 
         // Take custom input into account.
         if ($custom_input = $this->getCustomInput()) {
